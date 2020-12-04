@@ -3,7 +3,7 @@
 Run [deepin desktop](https://www.deepin.org) in a Docker container. 
 Use [x11docker](https://github.com/mviereck/x11docker) to run image. 
 
-The docker images based on the Dockerfiles in this repo will be generated automatically on [Docker hub](https://hub.docker.com/repositories/docker/hongyizhao) triggered by [hook scripts](https://github.com/hongyi-zhao/dockerfile-x11docker-deepin/tree/master/hooks) after each commit.
+The docker images based on the Dockerfiles in this repo will be generated automatically on [Docker hub](https://hub.docker.com/repositories/docker/hongyizhao) triggered by hook scripts after each commit.
 
 Run desktop with:
 ```
