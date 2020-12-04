@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+script_realpath="$(realpath -e -- "${BASH_SOURCE[0]}")"
+
+topdir=$(
+cd -P -- "$(dirname -- "$script_realpath")" &&
+pwd -P
+) 
+
+#https://windsock.io/automated-docker-image-builds-with-multiple-tags/
+#https://devopsheaven.com/docker/dockerhub/2018/04/09/delete-docker-image-tag-dockerhub.html
+#https://github.com/lumir-mrkva/remove-dockerhub-tag
+#https://docs.docker.com/docker-hub/builds/advanced/#custom-build-phase-hooks
+
+set -e
+
+. $topdir/environment
+
+#For deepin:
+#DOCKER_REPO=index.docker.io/hongyizhao/deepin
+#DOCKERFILE_PATH=Dockerfile
+
+#For deepin-wine:
+#DOCKER_REPO=index.docker.io/hongyizhao/deepin-wine
+#DOCKERFILE_PATH=Dockerfile.deepin-wine
+
+docker push ${DOCKER_REPO}:${DOCKER_TAG}
+

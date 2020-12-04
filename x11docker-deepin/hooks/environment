@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+# Choose a deepin mirror close to your location.
+# Many further mirrors are listed at: https://www.deepin.org/en/mirrors/packages/
+#ENV DEEPIN_MIRROR=http://mirrors.kernel.org/deepin/
+
+#ENV DEEPIN_MIRROR=http://packages.deepin.com/deepin
+#ENV DEEPIN_MIRROR=https://community-packages.deepin.com/deepin
+#ENV DEEPIN_MIRROR=http://mirrors.ustc.edu.cn/deepin
+#ENV DEEPIN_MIRROR=https://mirror.deepines.com/deepin
+
+#ENV DEEPIN_APPSTORE_MIRROR=https://mirror.deepines.com/testing/appstore
+#ENV DEEPIN_APPSTORE_MIRROR=https://community-store-packages.deepin.com/appstore
+
+DEEPIN_MIRROR=http://mirrors.ustc.edu.cn/deepin
+DEEPIN_APPSTORE_MIRROR=https://mirror.deepines.com/testing/appstore
+
+#https://docs.docker.com/docker-hub/builds/advanced/#environment-variables-for-building-and-testing
+
+#    SOURCE_BRANCH: the name of the branch or the tag that is currently being tested.
+#    SOURCE_COMMIT: the SHA1 hash of the commit being tested.
+#    COMMIT_MSG: the message from the commit being tested and built.
+#    DOCKER_REPO: the name of the Docker repository being built.
+#    DOCKERFILE_PATH: the dockerfile currently being built.
+#    DOCKER_TAG: the Docker repository tag being built.
+#    IMAGE_NAME: the name and tag of the Docker repository being built. (This variable is a combination of DOCKER_REPO:DOCKER_TAG.)
+DOCKER_REPO_DEEPIN=index.docker.io/hongyizhao/deepin
+DOCKER_REPO_DEEPIN_WINE=index.docker.io/hongyizhao/deepin-wine
+
+#DOCKER_TAG=latest
+DOCKER_TAG=apricot
+DEEPIN_RELEASE=$DOCKER_TAG
+
+
