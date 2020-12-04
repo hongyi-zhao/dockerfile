@@ -30,7 +30,9 @@ pwd -P
 #repoName=${IMAGE_NAME:0:tagStart-1}
 
 # Tag and push image for additional tag
-docker tag ${IMAGE_NAME} ${DOCKER_REPO}:${DOCKER_TAG}
-docker push ${DOCKER_REPO}:${DOCKER_TAG}
+for tag in "${newTAGS}"; do
+  docker tag ${DOCKER_REPO}:${DOCKER_TAG} ${DOCKER_REPO}:${tag}
+  docker push ${DOCKER_REPO}:${tag}
+done
 
 
