@@ -24,11 +24,9 @@ DEEPIN_APPSTORE_MIRROR=https://mirror.deepines.com/testing/appstore
 #    DOCKERFILE_PATH: the dockerfile currently being built.
 #    DOCKER_TAG: the Docker repository tag being built.
 #    IMAGE_NAME: the name and tag of the Docker repository being built. (This variable is a combination of DOCKER_REPO:DOCKER_TAG.)
-DOCKER_REPO_DEEPIN=index.docker.io/hongyizhao/deepin
-DOCKER_REPO_DEEPIN_WINE=index.docker.io/hongyizhao/deepin-wine
+DOCKER_REPO=index.docker.io/hongyizhao/deepin
 
+DEEPIN_RELEASE=apricot
 #DOCKER_TAG=latest
-DOCKER_TAG=apricot
-DEEPIN_RELEASE=$DOCKER_TAG
-
+DOCKER_TAG=$DEEPIN_RELEASE
 

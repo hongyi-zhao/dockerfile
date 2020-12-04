@@ -30,7 +30,7 @@
 
 #### stage 0: debian, debootstrap ####
 #The following variables only available in all FROM instructions during the building time:
-ARG DOCKER_TAG
+#ARG DOCKER_TAG
 
 FROM debian
 #The following variables only existing in the current stage during the building time: 

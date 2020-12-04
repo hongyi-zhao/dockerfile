@@ -2,9 +2,9 @@
 #https://github.com/mviereck/dockerfile-x11docker-deepin#deepin-community-repository
 
 #The following variables only available in all FROM instructions during the building time:
-ARG DOCKER_TAG
+#ARG DOCKER_TAG
 
-FROM hongyizhao/deepin:${DOCKER_TAG}
+FROM hongyizhao/deepin
 #The following variables only existing in the current stage during the building time: 
 ARG DEEPIN_MIRROR
 ARG DEEPIN_APPSTORE_MIRROR

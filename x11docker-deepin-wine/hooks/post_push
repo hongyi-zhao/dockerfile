@@ -6,11 +6,6 @@ cd -P -- "$(dirname -- "$script_realpath")" &&
 pwd -P
 ) 
 
-#https://windsock.io/automated-docker-image-builds-with-multiple-tags/
-#https://devopsheaven.com/docker/dockerhub/2018/04/09/delete-docker-image-tag-dockerhub.html
-#https://github.com/lumir-mrkva/remove-dockerhub-tag
-#https://docs.docker.com/docker-hub/builds/advanced/#custom-build-phase-hooks
-
 #https://docs.docker.com/docker-hub/builds/advanced/#environment-variables-for-building-and-testing
 
 #    SOURCE_BRANCH: the name of the branch or the tag that is currently being tested.
@@ -21,5 +16,21 @@ pwd -P
 #    DOCKER_TAG: the Docker repository tag being built.
 #    IMAGE_NAME: the name and tag of the Docker repository being built. (This variable is a combination of DOCKER_REPO:DOCKER_TAG.)
 
-docker push ${IMAGE_NAME}
+. $topdir/environment
+#echo Some customized variables are shown below:
+#echo DEEPIN_MIRROR=$DEEPIN_MIRROR
+#echo DEEPIN_APPSTORE_MIRROR=$DEEPIN_APPSTORE_MIRROR
+
+#echo DOCKER_TAG=${DOCKER_TAG}
+#echo DEEPIN_RELEASE=${DEEPIN_RELEASE}
+
+#https://windsock.io/automated-docker-image-builds-with-multiple-tags/
+# Parse image name for repo name
+#tagStart=$(expr index "$IMAGE_NAME" :)
+#repoName=${IMAGE_NAME:0:tagStart-1}
+
+# Tag and push image for additional tag
+docker tag ${IMAGE_NAME} ${DOCKER_REPO}:${DOCKER_TAG}
+docker push ${DOCKER_REPO}:${DOCKER_TAG}
+
 

@@ -25,7 +25,7 @@ pwd -P
 #https://codeclimbing.com/automate-your-builds-on-docker-hub-by-writing-a-build-hook-script/
 #https://github.com/SamueleA/docker-hub-auto-build-tutorial
 #https://hub.docker.com/repository/docker/samueleago/auto-build-tutorial
-
+#https://windsock.io/automated-docker-image-builds-with-multiple-tags/
 
 #https://docs.docker.com/docker-hub/builds/advanced/#environment-variables-for-building-and-testing
 
@@ -57,8 +57,6 @@ echo DEEPIN_RELEASE=${DEEPIN_RELEASE}
 
 docker build --build-arg DEEPIN_MIRROR=${DEEPIN_MIRROR} \
                --build-arg DEEPIN_APPSTORE_MIRROR=${DEEPIN_APPSTORE_MIRROR} \
-               --build-arg DOCKER_TAG=${DOCKER_TAG} \
-               --build-arg DEEPIN_RELEASE=${DEEPIN_RELEASE} \
-               -t ${DOCKER_REPO}:${DOCKER_TAG} .
+               --build-arg DEEPIN_RELEASE=${DEEPIN_RELEASE} .
 
 

@@ -16,5 +16,5 @@ docker build --network host --build-arg http_proxy='' --build-arg https_proxy=''
              --build-arg DEEPIN_APPSTORE_MIRROR=${DEEPIN_APPSTORE_MIRROR} \
              --build-arg DOCKER_TAG=${DOCKER_TAG} \
              --build-arg DEEPIN_RELEASE=${DEEPIN_RELEASE} \
-             -t ${DOCKER_REPO_DEEPIN}:${DOCKER_TAG} .
+             -t ${DOCKER_REPO}:${DOCKER_TAG} .
 

@@ -11,17 +11,15 @@ pwd -P
 #https://github.com/lumir-mrkva/remove-dockerhub-tag
 #https://docs.docker.com/docker-hub/builds/advanced/#custom-build-phase-hooks
 
-set -e
+#https://docs.docker.com/docker-hub/builds/advanced/#environment-variables-for-building-and-testing
 
-. $topdir/environment
+#    SOURCE_BRANCH: the name of the branch or the tag that is currently being tested.
+#    SOURCE_COMMIT: the SHA1 hash of the commit being tested.
+#    COMMIT_MSG: the message from the commit being tested and built.
+#    DOCKER_REPO: the name of the Docker repository being built.
+#    DOCKERFILE_PATH: the dockerfile currently being built.
+#    DOCKER_TAG: the Docker repository tag being built.
+#    IMAGE_NAME: the name and tag of the Docker repository being built. (This variable is a combination of DOCKER_REPO:DOCKER_TAG.)
 
-#For deepin:
-#DOCKER_REPO=index.docker.io/hongyizhao/deepin
-#DOCKERFILE_PATH=Dockerfile
-
-#For deepin-wine:
-#DOCKER_REPO=index.docker.io/hongyizhao/deepin-wine
-#DOCKERFILE_PATH=Dockerfile.deepin-wine
-
-docker push ${DOCKER_REPO}:${DOCKER_TAG}
+docker push ${IMAGE_NAME}
 
