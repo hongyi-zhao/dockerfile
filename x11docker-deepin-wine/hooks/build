@@ -57,6 +57,7 @@ echo newTAGS=${newTAGS}
 
 docker build --build-arg DEEPIN_MIRROR=${DEEPIN_MIRROR} \
                --build-arg DEEPIN_APPSTORE_MIRROR=${DEEPIN_APPSTORE_MIRROR} \
-               --build-arg DEEPIN_RELEASE=${DEEPIN_RELEASE} .
+               --build-arg DEEPIN_RELEASE=${DEEPIN_RELEASE} \
+               -t ${IMAGE_NAME} .
 
 
