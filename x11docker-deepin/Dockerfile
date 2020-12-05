@@ -77,11 +77,11 @@ exit 0\n\
 
 # debootstrap script
 RUN mkdir -p /usr/share/debootstrap/scripts && \
-    echo -en "mirror_style release\n\
+    echo -n "mirror_style release\n\
 download_style apt\n\
 finddebs_style from-indices\n\
 variants - buildd fakechroot minbase\n\
-. /usr/share/debootstrap/scripts/debian-common \n\
+. /usr/share/debootstrap/scripts/debian-common\n\
 " > /usr/share/debootstrap/scripts/$DEEPIN_RELEASE
 
 RUN debootstrap --variant=minbase --arch=amd64 $DEEPIN_RELEASE /rootfs $DEEPIN_MIRROR && \
@@ -117,11 +117,11 @@ RUN apt-get update && \
         x11-xserver-utils && \
     /cleanup
     
-# Some additional tools added here:
+# Some additional tools comes here:
 RUN apt-get update && \
     env DEBIAN_FRONTEND=noninteractive apt-get install -y \
         iproute2 iptables iputils-ping iputils-tracepath \
-        openssh-server openssh-client dnsutils net-tools netcat socat connect-proxy ncat haproxy tcpdump pv iftop \
+        openssh-server openssh-client dnsutils net-tools netcat ncat socat connect-proxy haproxy tcpdump pv iftop \
         build-essential gcc make cmake git curl gawk \
         apt-file apt-transport-https apt-utils gdebi synaptic \
         bash-completion libpulse0 pulseaudio \
@@ -135,7 +135,7 @@ RUN apt-get update && \
 RUN apt-get update && \
     env DEBIAN_FRONTEND=noninteractive apt-get install -y \
         equivs && \
-    echo "Section: misc\n\
+    echo -n "Section: misc\n\
 Priority: optional\n\
 Standards-Version: 3.9.2\n\
 Package: deepin-user-experience-daemon\n\
