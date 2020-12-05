@@ -65,8 +65,25 @@ RUN sed -ri "s|^(deb(-src)?[[:blank:]]+https?://)([^/]+)|\1$(echo $DEEPIN_MIRROR
     echo "deb     $DEEPIN_MIRROR $DEEPIN_RELEASE main contrib non-free" > /rootfs/etc/apt/sources.list && \
     echo "deb-src $DEEPIN_MIRROR $DEEPIN_RELEASE main contrib non-free" >> /rootfs/etc/apt/sources.list
 
+
+#https://www.tutorialfor.com/blog-274404.htm
+#https://stackoverflow.com/questions/33439230/how-to-write-commands-with-multiple-lines-in-dockerfile-while-preserving-the-new
+#https://mihamina.rktmb.org/2016/06/dockerfile-multiline-to-file.html
+#https://github.com/moby/moby/issues/1799
+#https://github.com/mviereck/dockerfile-x11docker-deepin/issues/41#issuecomment-739184425
+#docker build can only read one line. \ disables the newline and allows to read multiple lines. Without this the build would fail, just try out.
+#To get newlines with echo in the resulting file I add \n.
+
+#SHELL ["/bin/bash", "-c"]
+#RUN echo $"command substitute `hostname -i` \n\
+##comment line \n\
+#variable expanding or not: \$HOME $HOME \n\
+#single and double quote: ' \" \n\
+#" > blabla
+
+
 # cleanup script for use after apt-get
-RUN echo -n '#!/bin/sh\n\
+RUN echo '#!/bin/sh\n\
 env DEBIAN_FRONTEND=noninteractive apt-get autoremove -y\n\
 apt-get clean\n\
 find /var/lib/apt/lists -type f -delete\n\
@@ -77,7 +94,7 @@ exit 0\n\
 
 # debootstrap script
 RUN mkdir -p /usr/share/debootstrap/scripts && \
-    echo -en "mirror_style release\n\
+    echo "mirror_style release\n\
 download_style apt\n\
 finddebs_style from-indices\n\
 variants - buildd fakechroot minbase\n\
@@ -135,7 +152,7 @@ RUN apt-get update && \
 RUN apt-get update && \
     env DEBIAN_FRONTEND=noninteractive apt-get install -y \
         equivs && \
-    echo -en "Section: misc\n\
+    echo "Section: misc\n\
 Priority: optional\n\
 Standards-Version: 3.9.2\n\
 Package: deepin-user-experience-daemon\n\
