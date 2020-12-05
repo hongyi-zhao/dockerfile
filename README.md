@@ -1,3 +1,22 @@
+# Check the dockerfile
+
+For using hadolint, see [here](https://github.com/hadolint/hadolint/issues/506) for more info.
+```
+docker run --rm -i hadolint/hadolint < Dockerfile
+```
+For using dockerfilelint.
+```
+$ sudo apt install npm
+$ npm config set proxy http://127.0.0.1:8080
+$ npm config set https-proxy http://127.0.0.1:8080
+$ sudo npm install -g dockerfilelint
+$ cat .npmrc
+proxy=http://127.0.0.1:8080/
+https-proxy=http://127.0.0.1:8080
+
+$ dockerfilelint < Dockerfile
+```
+
 # x11docker/deepin
 
 Run [deepin desktop](https://www.deepin.org) in a Docker container. 
