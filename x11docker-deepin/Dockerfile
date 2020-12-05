@@ -66,14 +66,14 @@ RUN sed -ri "s|^(deb(-src)?[[:blank:]]+https?://)([^/]+)|\1$(echo $DEEPIN_MIRROR
     echo "deb-src $DEEPIN_MIRROR $DEEPIN_RELEASE main contrib non-free" >> /rootfs/etc/apt/sources.list
 
 # cleanup script for use after apt-get
-RUN echo -en "#!/bin/sh\n\
+RUN echo -n '#!/bin/sh\n\
 env DEBIAN_FRONTEND=noninteractive apt-get autoremove -y\n\
 apt-get clean\n\
 find /var/lib/apt/lists -type f -delete\n\
 find /var/cache -type f -delete\n\
 find /var/log -type f -delete\n\
 exit 0\n\
-" > /rootfs/cleanup && chmod +x /rootfs/cleanup
+' > /rootfs/cleanup && chmod +x /rootfs/cleanup
 
 # debootstrap script
 RUN mkdir -p /usr/share/debootstrap/scripts && \
