@@ -66,7 +66,7 @@ RUN sed -ri "s|^(deb(-src)?[[:blank:]]+https?://)([^/]+)|\1$(echo $DEEPIN_MIRROR
     echo "deb-src $DEEPIN_MIRROR $DEEPIN_RELEASE main contrib non-free" >> /rootfs/etc/apt/sources.list
 
 # cleanup script for use after apt-get
-RUN echo '#! /bin/sh\n\
+RUN echo '#!/bin/sh\n\
 env DEBIAN_FRONTEND=noninteractive apt-get autoremove -y\n\
 apt-get clean\n\
 find /var/lib/apt/lists -type f -delete\n\
