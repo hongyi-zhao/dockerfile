@@ -121,10 +121,11 @@ RUN apt-get update && \
 RUN apt-get update && \
     env DEBIAN_FRONTEND=noninteractive apt-get install -y \
         iproute2 iptables iputils-ping iputils-tracepath \
-        dnsutils net-tools netcat socat haproxy tcpdump pv iftop \
+        openssh-server openssh-client dnsutils net-tools netcat socat connect-proxy ncat haproxy tcpdump pv iftop \
         build-essential gcc make cmake git curl gawk \
-        uuid apt-file bash-completion \
-        gdebi synaptic equivs unrar lsb-release apt-utils apt-transport-https openssh-server openssh-client filezilla \
+        apt-file apt-transport-https apt-utils gdebi synaptic \
+        bash-completion libpulse0 pulseaudio \
+        uuid equivs unrar lsb-release \
         xfonts-wqy fonts-wqy-microhei fonts-wqy-zenhei nano gedit gedit-plugins vim xclip xsel && \
     /cleanup    
 
