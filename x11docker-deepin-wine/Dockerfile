@@ -49,7 +49,7 @@ RUN apt-get update && \
     env DEBIAN_FRONTEND=noninteractive apt-get install -y \
         fcitx fcitx-googlepinyin fcitx-module-cloudpinyin && \
     mkdir -p /etc/xdg/autostart && \
-    echo "[Desktop Entry]\n\
+    echo -en "[Desktop Entry]\n\
 Encoding=UTF-8\n\
 Version=0.9.4\n\
 Type=Application\n\
