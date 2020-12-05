@@ -77,7 +77,7 @@ exit 0\n\
 
 # debootstrap script
 RUN mkdir -p /usr/share/debootstrap/scripts && \
-    echo -n "mirror_style release\n\
+    echo -en "mirror_style release\n\
 download_style apt\n\
 finddebs_style from-indices\n\
 variants - buildd fakechroot minbase\n\
@@ -135,7 +135,7 @@ RUN apt-get update && \
 RUN apt-get update && \
     env DEBIAN_FRONTEND=noninteractive apt-get install -y \
         equivs && \
-    echo -n "Section: misc\n\
+    echo -en "Section: misc\n\
 Priority: optional\n\
 Standards-Version: 3.9.2\n\
 Package: deepin-user-experience-daemon\n\
