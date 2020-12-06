@@ -1,10 +1,10 @@
 # Check the dockerfile
 
-For using hadolint, see [here](https://github.com/hadolint/hadolint/issues/506) for more info.
+With [hadolint](https://github.com/hadolint/hadolint/issues/506).
 ```
 docker run --rm -i hadolint/hadolint < Dockerfile
 ```
-For using dockerfilelint.
+With [dockerfilelint](https://github.com/replicatedhq/dockerfilelint).
 ```
 $ sudo apt install npm
 $ npm config set proxy http://127.0.0.1:8080
