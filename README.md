@@ -16,7 +16,7 @@ https-proxy=http://127.0.0.1:8080
 
 $ dockerfilelint < Dockerfile
 ```
-
+     
 # x11docker/deepin
 
 Run [deepin desktop](https://www.deepin.org) in a Docker container. 
