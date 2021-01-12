@@ -29,6 +29,8 @@ ARG DEEPIN_RELEASE
 #Note that this needs xrandr / package x11-xserver-utils in image.
 
 #The variables introduced by env command only available in the layer of this RUN instruction:
+#Used the command similar to the folloiwng for testing specific applications in the container before putting them into Dockerfile.
+# sudo apt-get -o Acquire::http::proxy="socks5h://127.0.0.1:18888/" install com.tencent.meeting.deepin
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 1C30362C0A53D5BB && \
     echo "deb     ${DEEPIN_MIRROR} ${DEEPIN_RELEASE} main contrib non-free"  > /etc/apt/sources.list && \
     echo "deb-src ${DEEPIN_MIRROR} ${DEEPIN_RELEASE} main contrib non-free"  >> /etc/apt/sources.list && \
