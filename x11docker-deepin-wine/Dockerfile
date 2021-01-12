@@ -36,9 +36,14 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 1C30362C0A53D5BB &&
     dpkg --add-architecture i386 && \
     apt-get update && \
     env DEBIAN_FRONTEND=noninteractive apt-get install -y \
-        com.qq.weixin.deepin com.qq.im.deepin && apt-get clean
-RUN cp /opt/apps/com.qq.weixin.deepin/entries/applications/com.qq.weixin.deepin.desktop /usr/share/applications/ && \
-    cp /opt/apps/com.qq.im.deepin/entries/applications/com.qq.im.deepin.desktop /usr/share/applications/
+        com.qq.weixin.deepin \
+        com.qq.im.deepin \
+        com.tencent.meeting.deepin && \
+        apt-get clean
+RUN cp /opt/apps/com.qq.weixin.deepin/entries/applications/com.qq.weixin.deepin.desktop /usr/share/applications && \
+    cp /opt/apps/com.qq.im.deepin/entries/applications/com.qq.im.deepin.desktop /usr/share/applications && \
+    cp /opt/apps/com.tencent.meeting.deepin/entries/applications/com.tencent.meeting.deepin.desktop /usr/share/applications
+
     
 #https://github.com/mviereck/dockerfile-x11docker-deepin/issues/31#issuecomment-734367547
 #With option --home the setting is stored (has been before, too), but now it immediatly works after startup without running the config gui again.
