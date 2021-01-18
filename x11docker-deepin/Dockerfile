@@ -138,11 +138,11 @@ RUN apt-get update && \
 RUN apt-get update && \
     env DEBIAN_FRONTEND=noninteractive apt-get install -y \
         iproute2 iptables iputils-ping iputils-tracepath \
-        openssh-server openssh-client dnsutils net-tools netcat \
+        openssh-server openssh-client dnsutils net-tools netcat traceroute \
         ncat socat connect-proxy haproxy tcpdump pv iftop firefox-esr \
         build-essential gcc make cmake git curl gawk \
         apt-file apt-transport-https apt-utils gdebi synaptic \
-        bash-completion libpulse0 pulseaudio \
+        bash-completion libpulse0 pulseaudio vlc \
         uuid equivs unrar lsb-release \
         xfonts-wqy fonts-wqy-microhei fonts-wqy-zenhei nano gedit gedit-plugins vim xclip xsel && \
     /cleanup    
