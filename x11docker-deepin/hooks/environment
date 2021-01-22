@@ -5,7 +5,7 @@
 #ENV DEEPIN_MIRROR=http://packages.deepin.com/deepin
 #ENV DEEPIN_MIRROR=https://mirror.deepines.com/deepin
 #ENV DEEPIN_APPSTORE_MIRROR=https://mirror.deepines.com/testing/appstore
-DEEPIN_MIRROR=http://mirrors.tuna.tsinghua.edu.cn/deepin
+DEEPIN_MIRROR=https://mirrors.tuna.tsinghua.edu.cn/deepin
 DEEPIN_APPSTORE_MIRROR=https://mirror.deepines.com/testing/appstore
 
 #https://docs.docker.com/docker-hub/builds/advanced/#environment-variables-for-building-and-testing
