@@ -139,7 +139,7 @@ RUN apt-get update && \
     env DEBIAN_FRONTEND=noninteractive apt-get install -y \
         iproute2 iptables iputils-ping iputils-tracepath \
         openssh-server openssh-client dnsutils net-tools netcat traceroute \
-        ncat socat connect-proxy haproxy tcpdump pv iftop firefox-esr \
+        ncat socat connect-proxy haproxy tcpdump pv iftop iperf3 firefox-esr \
         build-essential gcc make cmake git curl gawk \
         apt-file apt-transport-https apt-utils gdebi synaptic \
         bash-completion libpulse0 pulseaudio vlc \
