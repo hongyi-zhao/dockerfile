@@ -22,11 +22,10 @@
 #
 # See x11docker --help for further options.
 
-
 #https://docs.docker.com/engine/reference/commandline/build/#set-build-time-variables---build-arg
-#https://tangx.in/2020/11/06/dockerfiles-args-scope/
-#1. All ARGs before the first FROM, take effect and only take effect in all FROM instructions.
-#2. The ARG after FROM is only effective in the current FROM scope. That is, it only takes effect at the current stage.
+#https://docs.docker.com/engine/reference/builder/#arg
+#https://docs.docker.com/engine/reference/builder/#scope
+#https://docs.docker.com/engine/reference/builder/#using-arg-variables
 
 #### stage 0: debian, debootstrap ####
 #The following variables only available in all FROM instructions during the building time:
