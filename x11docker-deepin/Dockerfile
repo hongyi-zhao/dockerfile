@@ -25,8 +25,8 @@
 
 #https://docs.docker.com/engine/reference/commandline/build/#set-build-time-variables---build-arg
 #https://tangx.in/2020/11/06/dockerfiles-args-scope/
-#1. 在第一个 FROM 之前的所有 ARG , 在所有 FROM 中生效, 仅在 FROM 中生效
-#2. 在 FROM 后的 ARG, 仅在当前 FROM 作用域生效。 即仅在当前阶段 (stage) 生效
+#1. All ARGs before the first FROM, take effect and only take effect in all FROM instructions.
+#2. The ARG after FROM is only effective in the current FROM scope. That is, it only takes effect at the current stage.
 
 #### stage 0: debian, debootstrap ####
 #The following variables only available in all FROM instructions during the building time:
