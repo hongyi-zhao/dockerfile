@@ -32,7 +32,18 @@ ARG DEEPIN_APPSTORE_RELEASE
 #The variables introduced by env command only available in the layer of this RUN instruction:
 #Used the command similar to the folloiwng for testing specific applications in the container before putting them into Dockerfile.
 # sudo apt-get -o Acquire::http::proxy="socks5h://127.0.0.1:18888/" install com.tencent.meeting.deepin
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 1C30362C0A53D5BB && \
+
+#Based on my tries, it seems that the method based on HKP protocol has a higher success rate.
+# It seems that the options --recv and --recv-keys are equivalent.
+#$ bhgrep 1C30362C0A53D5BB|grep ^0|grep -v grep|cut -d ' ' -f4- |awk '!a[$0]++'
+#sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 1C30362C0A53D5BB
+#sudo apt-key adv --keyserver attester.flowcrypt.com --recv-keys 1C30362C0A53D5BB
+#sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 1C30362C0A53D5BB
+#sudo apt-key adv --keyserver hkp://attester.flowcrypt.com --recv-keys 1C30362C0A53D5BB
+#sudo apt-key adv --keyserver hkp://attester.flowcrypt.com:80 --recv-keys 1C30362C0A53D5BB
+#sudo apt-key adv --keyserver hkps://keyserver.ubuntu.com:443 --recv-keys 1C30362C0A53D5BB
+#sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com --recv 1C30362C0A53D5BB
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com --recv-keys 1C30362C0A53D5BB && \
     echo "deb     ${DEEPIN_MIRROR} ${DEEPIN_RELEASE} main contrib non-free"  > /etc/apt/sources.list && \
     echo "deb-src ${DEEPIN_MIRROR} ${DEEPIN_RELEASE} main contrib non-free"  >> /etc/apt/sources.list && \
     echo "deb ${DEEPIN_APPSTORE_MIRROR} ${DEEPIN_APPSTORE_RELEASE} appstore" > /etc/apt/sources.list.d/appstore.list && \
