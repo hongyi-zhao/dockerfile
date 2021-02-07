@@ -7,8 +7,9 @@
 FROM hongyizhao/deepin
 #The following variables only existing in the current stage during the building time: 
 ARG DEEPIN_MIRROR
-ARG DEEPIN_APPSTORE_MIRROR
 ARG DEEPIN_RELEASE
+ARG DEEPIN_APPSTORE_MIRROR
+ARG DEEPIN_APPSTORE_RELEASE
 
 # The variables defined with ENV will be available after the image has been built:
 # Choose a deepin mirror close to your location.
@@ -34,7 +35,7 @@ ARG DEEPIN_RELEASE
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 1C30362C0A53D5BB && \
     echo "deb     ${DEEPIN_MIRROR} ${DEEPIN_RELEASE} main contrib non-free"  > /etc/apt/sources.list && \
     echo "deb-src ${DEEPIN_MIRROR} ${DEEPIN_RELEASE} main contrib non-free"  >> /etc/apt/sources.list && \
-    echo "deb ${DEEPIN_APPSTORE_MIRROR} ${DEEPIN_RELEASE} appstore" > /etc/apt/sources.list.d/appstore.list && \
+    echo "deb ${DEEPIN_APPSTORE_MIRROR} ${DEEPIN_APPSTORE_RELEASE} appstore" > /etc/apt/sources.list.d/appstore.list && \
     dpkg --add-architecture i386 && \
     apt-get update && \
     env DEBIAN_FRONTEND=noninteractive apt-get install -y \
