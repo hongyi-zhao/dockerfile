@@ -71,10 +71,10 @@ script_extname=${script_name##*.}
 #printf "%-16s %s\n" "pkg_realpath:" $pkg_realpath
 #return 0 2>/dev/null || exit 0
 
-#The docker images can be created on locale host with:
+#Build the docker image locally from source:
 #git clone https://github.com/hongyi-zhao/dockerfile.git dockerfile.git
-#cd dockerfile.git/x11docker-deepin-wine.git
-. $script_realdirname/hooks/environment
+#cd dockerfile.git/x11docker-deepin-wine
+. hooks/environment
 docker build --network host --build-arg http_proxy='' --build-arg https_proxy='' \
              --build-arg DEEPIN_MIRROR=${DEEPIN_MIRROR} \
              --build-arg DEEPIN_APPSTORE_MIRROR=${DEEPIN_APPSTORE_MIRROR} \
