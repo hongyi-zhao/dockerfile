@@ -28,9 +28,6 @@
 #https://docs.docker.com/engine/reference/builder/#using-arg-variables
 
 #### stage 0: debian, debootstrap ####
-#The following variables only available in all FROM instructions during the building time:
-#ARG DOCKER_TAG
-
 FROM debian
 #The following variables only existing in the current stage during the building time: 
 ARG DEEPIN_MIRROR
@@ -49,8 +46,7 @@ ARG DEEPIN_APPSTORE_RELEASE
 #ENV DEEPIN_MIRROR=https://mirror.deepines.com/deepin
 
 #ENV DEEPIN_APPSTORE_MIRROR=https://mirror.deepines.com/testing/appstore
-#ENV DEEPIN_APPSTORE_MIRROR=https://community-store-packages.deepin.com/appstore
-
+#ENV DEEPIN_APPSTORE_MIRROR=https://mirror.deepines.com/appstore
 
 # prepare sources and keys
 #The variables introduced by env command only available in the layer of this RUN instruction:

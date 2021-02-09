@@ -6,7 +6,7 @@
 #ENV DEEPIN_MIRROR=https://mirror.deepines.com/deepin
 #ENV DEEPIN_APPSTORE_MIRROR=https://mirror.deepines.com/testing/appstore
 DEEPIN_MIRROR=https://mirrors.tuna.tsinghua.edu.cn/deepin
-DEEPIN_APPSTORE_MIRROR=https://mirror.deepines.com/testing/appstore
+DEEPIN_APPSTORE_MIRROR=https://mirror.deepines.com/appstore
 
 #https://docs.docker.com/docker-hub/builds/advanced/#environment-variables-for-building-and-testing
 
@@ -20,6 +20,4 @@ DEEPIN_APPSTORE_MIRROR=https://mirror.deepines.com/testing/appstore
 
 DEEPIN_RELEASE=apricot
 DEEPIN_APPSTORE_RELEASE=eagle
-#DOCKER_TAG=latest
-newTAGS=$DEEPIN_RELEASE
 

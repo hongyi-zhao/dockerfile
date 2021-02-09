@@ -104,9 +104,6 @@ docker push ${IMAGE_NAME}
 #repoName=${IMAGE_NAME:0:tagStart-1}
 
 # Tag and push image for additional tag
-for tag in "${newTAGS}"; do
-  docker tag ${IMAGE_NAME} ${DOCKER_REPO}:${tag}
-  docker push ${DOCKER_REPO}:${tag}
-done
-
+docker tag ${IMAGE_NAME} ${DOCKER_REPO}:${DEEPIN_RELEASE}
+docker push ${DOCKER_REPO}:${DEEPIN_RELEASE}
 

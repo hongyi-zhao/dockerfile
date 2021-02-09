@@ -77,8 +77,8 @@ script_extname=${script_name##*.}
 . hooks/environment
 docker build --network host --build-arg http_proxy='' --build-arg https_proxy='' \
              --build-arg DEEPIN_MIRROR=${DEEPIN_MIRROR} \
-             --build-arg DEEPIN_APPSTORE_MIRROR=${DEEPIN_APPSTORE_MIRROR} \
-             --build-arg DOCKER_TAG=${DOCKER_TAG} \
              --build-arg DEEPIN_RELEASE=${DEEPIN_RELEASE} \
-             -t hongyizhao/deepin-wine:${DOCKER_TAG} .
+             --build-arg DEEPIN_APPSTORE_MIRROR=${DEEPIN_APPSTORE_MIRROR} \
+             --build-arg DEEPIN_APPSTORE_RELEASE=${DEEPIN_APPSTORE_RELEASE} \
+             -t hongyizhao/deepin-wine:${DEEPIN_RELEASE} .
 

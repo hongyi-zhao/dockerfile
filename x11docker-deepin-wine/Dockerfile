@@ -1,9 +1,6 @@
 #https://www.deepin.org/en/2020/11/19/statements/
 #https://github.com/mviereck/dockerfile-x11docker-deepin#deepin-community-repository
 
-#The following variables only available in all FROM instructions during the building time:
-#ARG DOCKER_TAG
-
 FROM hongyizhao/deepin
 #The following variables only existing in the current stage during the building time: 
 ARG DEEPIN_MIRROR
@@ -22,8 +19,7 @@ ARG DEEPIN_APPSTORE_RELEASE
 #ENV DEEPIN_MIRROR=https://mirror.deepines.com/deepin
 
 #ENV DEEPIN_APPSTORE_MIRROR=https://mirror.deepines.com/testing/appstore
-#ENV DEEPIN_APPSTORE_MIRROR=https://community-store-packages.deepin.com/appstore
-
+#ENV DEEPIN_APPSTORE_MIRROR=https://mirror.deepines.com/appstore
 
 #https://github.com/mviereck/dockerfile-x11docker-deepin/issues/29#issuecomment-734294959
 #I've added this to x11docker, always done now without an option. So it fixes x11docker/cinnamon and x11docker/gnome as well.
