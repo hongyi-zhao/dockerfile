@@ -50,6 +50,24 @@ ARG DEEPIN_APPSTORE_RELEASE
 
 # prepare sources and keys
 #The variables introduced by env command only available in the layer of this RUN instruction:
+
+#$ man apt-key |egrep -A6 '^[ ]*adv'
+#       adv
+#           Pass advanced options to gpg. With adv --recv-key you can e.g.
+#           download key from keyservers directly into the trusted set of keys.
+#           Note that there are no checks performed, so it is easy to
+#           completely undermine the apt-secure(8) infrastructure if used
+#           without care.
+
+#$ man gpg|egrep -- '--(keyserver|recv-keys)' 
+#       --recv-keys keyIDs
+#                     your  key  from. See --keyserver-options honor-keyserver-
+#       --keyserver name
+#              This option is deprecated - please use the --keyserver in ‘dirm‐
+#              provided.  These  are the same as the global --keyserver-options
+#       --keyserver-options {name=value}
+
+
 RUN sed -ri "s|^(deb(-src)?[[:blank:]]+https?://)([^/]+)|\1$(echo $DEEPIN_MIRROR | cut -d '/' -f3)|" /etc/apt/sources.list && \
     apt-get update && \
     env DEBIAN_FRONTEND=noninteractive apt-get install -y \
