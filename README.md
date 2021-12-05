@@ -2,7 +2,7 @@
 
 With [hadolint](https://github.com/hadolint/hadolint/issues/506).
 ```
-docker run --rm -i hadolint/hadolint < Dockerfile
+$ docker run --rm -i hadolint/hadolint < Dockerfile
 ```
 With [dockerfilelint](https://github.com/replicatedhq/dockerfilelint).
 ```
@@ -26,12 +26,12 @@ The docker images based on the Dockerfiles in this repo will be generated automa
 
 Run desktop with:
 ```
-x11docker --desktop --init=systemd -- --cap-add=IPC_LOCK -- x11docker/deepin
+$ x11docker --desktop --init=systemd -- --cap-add=IPC_LOCK -- x11docker/deepin
 ```
 
 Run single application:
 ```
-x11docker x11docker/deepin deepin-terminal
+$ x11docker x11docker/deepin deepin-terminal
 ```
 
 # Options:
