@@ -41,7 +41,7 @@ RUN apt-get update && \
 ```
 
 ## Deepin repository
-See [here](https://github.com/mviereck/dockerfile-x11docker-deepin/issues/25#issuecomment-732643390) for [the official packages repository](https://community-packages.deepin.com/deepin/), [here](https://www.deepin.org/zh/2020/08/06/deepin-system-updates-2020-08-06/), and [here](https://www.deepin.org/en/2020/11/19/statements/) for more detailed infomartion.
+See [here](https://github.com/mviereck/dockerfile-x11docker-deepin/issues/25#issuecomment-732643390), [here](https://www.deepin.org/zh/2020/08/06/deepin-system-updates-2020-08-06/), and [here](https://www.deepin.org/en/2020/11/19/statements/) for more detailed infomartion.
 
 Many deepin wine applications need `i386` architecture support. Add this with:
 ```
