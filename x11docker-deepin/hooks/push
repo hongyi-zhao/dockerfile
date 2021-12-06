@@ -93,7 +93,6 @@ docker push ${IMAGE_NAME}
 
 #echo Some customized variables are shown below:
 #echo DEEPIN_MIRROR=$DEEPIN_MIRROR
-#echo DEEPIN_APPSTORE_MIRROR=$DEEPIN_APPSTORE_MIRROR
 
 #echo DOCKER_TAG=${DOCKER_TAG}
 #echo DEEPIN_RELEASE=${DEEPIN_RELEASE}

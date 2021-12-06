@@ -47,7 +47,7 @@ FROM x11docker/deepin
 
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 1C30362C0A53D5BB && \
     echo "deb https://community-packages.deepin.com/deepin apricot main contrib non-free"  > /etc/apt/sources.list && \
-    echo "deb-src https://community-packages.deepin.com/deepin apricot main contrib non-free"  > /etc/apt/sources.list && \
+    echo "deb-src https://community-packages.deepin.com/deepin apricot main contrib non-free"  >> /etc/apt/sources.list && \
     apt-get update
 ```
 
@@ -57,9 +57,16 @@ Many deepin wine applications need `i386` architecture support. Add this with:
 RUN dpkg --add-architecture i386 && apt-get update
 ```
 
-To install e.g. WeChat add this line:
+To install e.g. wechat and qq:
+
 ```
-RUN env DEBIAN_FRONTEND=noninteractive apt-get install -y com.qq.weixin.deepin && apt-get clean
+$ apt-cache pkgnames |grep -i ^com.qq
+com.qq.im.deepin
+com.qq.weixin.deepin
+```
+So the following command should be used:
+```
+RUN env DEBIAN_FRONTEND=noninteractive apt-get install -y com.qq.im.deepin com.qq.weixin.deepin && apt-get clean
 ```
 WeChat can be started in container with: `/opt/apps/com.qq.weixin.deepin/files/run.sh`. To let it appear in the application menu, add:
 ```

@@ -78,8 +78,6 @@ script_extname=${script_name##*.}
 docker build --network host --build-arg http_proxy='' --build-arg https_proxy='' \
              --build-arg DEEPIN_MIRROR=${DEEPIN_MIRROR} \
              --build-arg DEEPIN_RELEASE=${DEEPIN_RELEASE} \
-             --build-arg DEEPIN_APPSTORE_MIRROR=${DEEPIN_APPSTORE_MIRROR} \
-             --build-arg DEEPIN_APPSTORE_RELEASE=${DEEPIN_APPSTORE_RELEASE} \
              -t hongyizhao/deepin:${DEEPIN_RELEASE} .
 docker tag hongyizhao/deepin:${DEEPIN_RELEASE} hongyizhao/deepin:latest
 

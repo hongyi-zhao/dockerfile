@@ -113,12 +113,9 @@ echo IMAGE_NAME=$IMAGE_NAME
 . $script_realdirname/environment
 echo Some customized variables are shown below:
 echo DEEPIN_MIRROR=$DEEPIN_MIRROR
-echo DEEPIN_APPSTORE_MIRROR=$DEEPIN_APPSTORE_MIRROR
 echo DEEPIN_RELEASE=${DEEPIN_RELEASE}
 
 docker build --build-arg DEEPIN_MIRROR=${DEEPIN_MIRROR} \
              --build-arg DEEPIN_RELEASE=${DEEPIN_RELEASE} \
-             --build-arg DEEPIN_APPSTORE_MIRROR=${DEEPIN_APPSTORE_MIRROR} \
-             --build-arg DEEPIN_APPSTORE_RELEASE=${DEEPIN_APPSTORE_RELEASE} \
              -t ${IMAGE_NAME} .
 

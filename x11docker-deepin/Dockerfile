@@ -32,8 +32,6 @@ FROM debian
 #The following variables only existing in the current stage during the building time: 
 ARG DEEPIN_MIRROR
 ARG DEEPIN_RELEASE
-ARG DEEPIN_APPSTORE_MIRROR
-ARG DEEPIN_APPSTORE_RELEASE
 
 # The variables defined with ENV will be available after the image has been built:
 # Choose a deepin mirror close to your location.
@@ -45,8 +43,6 @@ ARG DEEPIN_APPSTORE_RELEASE
 #ENV DEEPIN_MIRROR=http://mirrors.ustc.edu.cn/deepin
 #ENV DEEPIN_MIRROR=https://mirror.deepines.com/deepin
 
-#ENV DEEPIN_APPSTORE_MIRROR=https://mirror.deepines.com/testing/appstore
-#ENV DEEPIN_APPSTORE_MIRROR=https://mirror.deepines.com/appstore
 
 # prepare sources and keys
 #The variables introduced by env command only available in the layer of this RUN instruction:

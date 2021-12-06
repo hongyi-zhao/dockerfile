@@ -1,12 +1,7 @@
 #!/usr/bin/env bash
 
-# Choose a deepin mirror close to your location.
-# Many further mirrors are listed at: https://www.deepin.org/zh/mirrors/packages/
-#ENV DEEPIN_MIRROR=http://packages.deepin.com/deepin
-#ENV DEEPIN_MIRROR=https://mirror.deepines.com/deepin
-#ENV DEEPIN_APPSTORE_MIRROR=https://mirror.deepines.com/testing/appstore
+# The official packages repository and community packages repository mirrors are listed at: https://www.deepin.org/en/mirrors/packages/
 DEEPIN_MIRROR=https://mirrors.tuna.tsinghua.edu.cn/deepin
-DEEPIN_APPSTORE_MIRROR=https://community-packages.deepin.com/deepin
 
 #https://docs.docker.com/docker-hub/builds/advanced/#environment-variables-for-building-and-testing
 
@@ -19,5 +14,4 @@ DEEPIN_APPSTORE_MIRROR=https://community-packages.deepin.com/deepin
 #    IMAGE_NAME: the name and tag of the Docker repository being built. (This variable is a combination of DOCKER_REPO:DOCKER_TAG.)
 
 DEEPIN_RELEASE=apricot
-DEEPIN_APPSTORE_RELEASE=eagle
 
