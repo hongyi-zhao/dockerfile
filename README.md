@@ -34,7 +34,7 @@ $ x11docker hongyizhao/deepin-wine deepin-terminal
 # Extend the base image
 To add your desired applications, create and build from a custom Dockerfile with this image as a base. Example with `firefox`:
 ```
-FROM x11docker/deepin
+FROM hongyizhao/deepin
 RUN apt-get update && \
     env DEBIAN_FRONTEND=noninteractive apt-get install -y firefox && \
     apt-get clean
