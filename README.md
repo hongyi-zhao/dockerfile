@@ -46,7 +46,8 @@ See [here](https://www.deepin.org/en/mirrors/packages/) for [the official packag
 FROM x11docker/deepin
 
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 1C30362C0A53D5BB && \
-    echo "deb [trusted=yes by-hash=force] https://mirrors.ustc.edu.cn/deepin apricot main contrib non-free"  > /etc/apt/sources.list && \
+    echo "deb https://community-packages.deepin.com/deepin apricot main contrib non-free"  > /etc/apt/sources.list && \
+    echo "deb-src https://community-packages.deepin.com/deepin apricot main contrib non-free"  > /etc/apt/sources.list && \
     apt-get update
 ```
 
