@@ -80,8 +80,7 @@ $ cd x11docker-deepin && bash build.sh
 $ cd x11docker-deepin-wine && bash build.sh
 ```
 
-# Run the image with x11docker:
-
+# Run the image using x11docker:
 ```
 $ pyenv shell 3.9.7
 $ x11docker --runasroot 'sed -r "s/^[[:blank:]]*[|]//" <<-EOF > /etc/sudoers
@@ -97,5 +96,4 @@ EOF' --xephyr --network=bridge --pulseaudio --xoverip --home --share=$HOME --sud
 ```
 
 # Screenshot
-
-![screenshot](https://raw.githubusercontent.com/mviereck/x11docker/screenshots/screenshot-deepin.png "deepin desktop running in Weston+Xwayland window using x11docker")
+![image](https://user-images.githubusercontent.com/11155854/144838310-83643432-8871-43a3-905d-d7b51e1c5445.png)
