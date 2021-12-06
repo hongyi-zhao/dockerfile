@@ -41,13 +41,12 @@ RUN apt-get update && \
 ```
 
 ## deepin repository
-See [here](https://www.deepin.org/en/2020/11/19/statements/), [here](https://wiki.deepin.org/wiki/Software_source) and [here](https://github.com/mviereck/dockerfile-x11docker-deepin/issues/38#issuecomment-737253563) for more infomation:
+See [here](https://www.deepin.org/en/mirrors/packages/) for [the official packages repository](https://community-packages.deepin.com/deepin/) and the community packages repository mirrors.
 ```
 FROM x11docker/deepin
 
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 1C30362C0A53D5BB && \
     echo "deb [trusted=yes by-hash=force] https://mirrors.ustc.edu.cn/deepin apricot main contrib non-free"  > /etc/apt/sources.list && \
-    echo "deb [trusted=yes by-hash=force] https://community-packages.deepin.com/deepin apricot main contrib non-free" > /etc/apt/sources.list.d/appstore.list && \
     apt-get update
 ```
 
