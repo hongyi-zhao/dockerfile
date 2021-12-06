@@ -72,8 +72,9 @@ RUN sed -ri "s|^(deb(-src)?[[:blank:]]+https?://)([^/]+)|\1$(echo $DEEPIN_MIRROR
     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 425956BB3E31DF51 && \
     mkdir -p /rootfs/etc/apt && \
     cp /etc/apt/trusted.gpg /rootfs/etc/apt/trusted.gpg && \
-    echo "deb     $DEEPIN_MIRROR $DEEPIN_RELEASE main contrib non-free" > /rootfs/etc/apt/sources.list && \
-    echo "deb-src $DEEPIN_MIRROR $DEEPIN_RELEASE main contrib non-free" >> /rootfs/etc/apt/sources.list
+    echo "deb $DEEPIN_MIRROR $DEEPIN_RELEASE main contrib non-free\n\
+deb-src $DEEPIN_MIRROR $DEEPIN_RELEASE main contrib non-free\n\
+" > /rootfs/etc/apt/sources.list
 
 
 #https://www.tutorialfor.com/blog-274404.htm

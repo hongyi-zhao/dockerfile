@@ -35,9 +35,17 @@ ARG DEEPIN_RELEASE
 #sudo apt-key adv --keyserver hkp://attester.flowcrypt.com:80 --recv-keys 1C30362C0A53D5BB
 #sudo apt-key adv --keyserver hkps://keyserver.ubuntu.com:443 --recv-keys 1C30362C0A53D5BB
 #sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com --recv 1C30362C0A53D5BB
+
+
+#https://github.com/mviereck/dockerfile-x11docker-deepin/issues/25#issuecomment-732643390
+#https://www.deepin.org/zh/2020/08/06/deepin-system-updates-2020-08-06/
+#https://www.deepin.org/en/2020/11/19/statements/
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com --recv-keys 1C30362C0A53D5BB && \
-    echo "deb     ${DEEPIN_MIRROR} ${DEEPIN_RELEASE} main contrib non-free"  > /etc/apt/sources.list && \
-    echo "deb-src ${DEEPIN_MIRROR} ${DEEPIN_RELEASE} main contrib non-free"  >> /etc/apt/sources.list && \
+    echo "deb ${DEEPIN_MIRROR} ${DEEPIN_RELEASE} main contrib non-free\n\
+deb-src ${DEEPIN_MIRROR} ${DEEPIN_RELEASE} main contrib non-free\n\
+deb https://community-packages.deepin.com/printer eagle non-free\n\
+deb https://community-store-packages.deepin.com/appstore apricot appstore\n\
+" > /etc/apt/sources.list && \
     dpkg --add-architecture i386 && \
     apt-get update && \
     env DEBIAN_FRONTEND=noninteractive apt-get install -y \
