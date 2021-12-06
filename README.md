@@ -57,7 +57,7 @@ Many deepin wine applications need `i386` architecture support. Add this with:
 RUN dpkg --add-architecture i386 && apt-get update
 ```
 
-To install e.g. wechat and qq:
+To install e.g. wechat and qq
 
 ```
 $ apt-cache pkgnames |grep -i ^com.qq
@@ -73,14 +73,14 @@ WeChat can be started in container with: `/opt/apps/com.qq.weixin.deepin/files/r
 RUN cp /opt/apps/com.qq.weixin.deepin/entries/applications/com.qq.weixin.deepin.desktop /usr/share/applications/
 ```
 
-# Build docker images from the Dockerfile manually:
+# Build docker images from the Dockerfile manually
 
 ```
 $ cd x11docker-deepin && bash build.sh
 $ cd x11docker-deepin-wine && bash build.sh
 ```
 
-# Run the image using x11docker:
+# Run the image using x11docker
 ```
 $ pyenv shell 3.9.7
 $ x11docker --runasroot 'sed -r "s/^[[:blank:]]*[|]//" <<-EOF > /etc/sudoers
