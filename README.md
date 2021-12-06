@@ -19,19 +19,16 @@ $ dockerfilelint < Dockerfile
      
 # x11docker/deepin
 
-Run [deepin desktop](https://www.deepin.org) in a Docker container. 
-Use [x11docker](https://github.com/mviereck/x11docker) to run image. 
-
-The docker images based on the Dockerfiles in this repo will be generated automatically on [Docker hub](https://hub.docker.com/repositories/docker/hongyizhao) triggered by hook scripts after each commit.
+Use [x11docker](https://github.com/mviereck/x11docker) to run [deepin desktop](https://www.deepin.org) in a Docker container. The docker images based on the Dockerfiles in this repo will be generated automatically on [Docker hub](https://hub.docker.com/repositories/docker/hongyizhao) triggered by hook scripts after each commit.
 
 Run desktop with:
 ```
-$ x11docker --desktop --init=systemd -- --cap-add=IPC_LOCK -- x11docker/deepin
+$ x11docker --desktop --init=systemd -- --cap-add=IPC_LOCK -- hongyizhao/deepin-wine
 ```
 
 Run single application:
 ```
-$ x11docker x11docker/deepin deepin-terminal
+$ x11docker hongyizhao/deepin-wine deepin-terminal
 ```
 
 # Options:
