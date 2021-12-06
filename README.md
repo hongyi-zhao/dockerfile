@@ -40,7 +40,7 @@ RUN apt-get update && \
     apt-get clean
 ```
 
-## deepin repository
+## Deepin repository
 See [here](https://www.deepin.org/en/mirrors/packages/) for [the official packages repository](https://community-packages.deepin.com/deepin/) and the community packages repository mirrors.
 ```
 FROM x11docker/deepin
