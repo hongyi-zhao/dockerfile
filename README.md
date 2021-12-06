@@ -41,16 +41,7 @@ RUN apt-get update && \
 ```
 
 ## Deepin repository
-See [here](https://www.deepin.org/en/mirrors/packages/) for [the official packages repository](https://community-packages.deepin.com/deepin/) and the community packages repository mirrors.
-```
-FROM x11docker/deepin
-
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 1C30362C0A53D5BB && \
-    echo "deb https://community-packages.deepin.com/deepin apricot main contrib non-free"  > /etc/apt/sources.list && \
-    echo "deb-src https://community-packages.deepin.com/deepin apricot main contrib non-free"  >> /etc/apt/sources.list && \
-    apt-get update
-```
-
+See [here](https://github.com/mviereck/dockerfile-x11docker-deepin/issues/25#issuecomment-732643390) for [the official packages repository](https://community-packages.deepin.com/deepin/), [here](https://www.deepin.org/zh/2020/08/06/deepin-system-updates-2020-08-06/), and [here](https://www.deepin.org/en/2020/11/19/statements/) for more detailed infomartion.
 
 Many deepin wine applications need `i386` architecture support. Add this with:
 ```
