@@ -102,3 +102,10 @@ $ LC_ALL=zh_CN.UTF-8 deepin-wine6-stable ~/.wine/drive_c/Program\ Files/Tencent/
 # Similar project
 - https://github.com/vufa/deepin-wine-wechat-arch
 - https://github.com/mviereck/dockerfile-x11docker-deepin
+
+# To do
+https://github.com/marketplace/actions/build-and-push-docker-images
+https://docs.github.com/en/actions/creating-actions/creating-a-docker-container-action
+https://docs.github.com/en/actions/publishing-packages/publishing-docker-images
+
+
