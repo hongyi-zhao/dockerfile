@@ -41,7 +41,16 @@ RUN apt-get update && \
 ```
 
 ## Deepin repository
-See [here](https://github.com/mviereck/dockerfile-x11docker-deepin/issues/25#issuecomment-732643390), [here](https://www.deepin.org/zh/2020/08/06/deepin-system-updates-2020-08-06/), and [here](https://www.deepin.org/en/2020/11/19/statements/) for more detailed infomartion.
+See [here](https://github.com/mviereck/dockerfile-x11docker-deepin/issues/25#issuecomment-732643390), [here](https://www.deepin.org/zh/2020/08/06/deepin-system-updates-2020-08-06/), and [here](https://www.deepin.org/en/2020/11/19/statements/) for more detailed infomartion. [The currently used configuration](https://github.com/hongyi-zhao/dockerfile/blob/7556649d60bc8a64693338fe1d965a99db744a09/x11docker-deepin-wine/Dockerfile#L43) is as follows:
+
+```
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com --recv-keys 1C30362C0A53D5BB && \
+    echo "deb ${DEEPIN_MIRROR} ${DEEPIN_RELEASE} main contrib non-free\n\
+deb-src ${DEEPIN_MIRROR} ${DEEPIN_RELEASE} main contrib non-free\n\
+deb https://community-packages.deepin.com/printer eagle non-free\n\
+deb https://community-store-packages.deepin.com/appstore apricot appstore\n\
+" > /etc/apt/sources.list
+```
 
 Many deepin wine applications need `i386` architecture support. Add this with:
 ```
