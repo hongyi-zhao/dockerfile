@@ -101,3 +101,4 @@ EOF' --xephyr --network=bridge --pulseaudio --xoverip --home --share=$HOME --sud
 # Similar project
 
 https://github.com/vufa/deepin-wine-wechat-arch
+https://github.com/mviereck/dockerfile-x11docker-deepin
