@@ -97,3 +97,7 @@ EOF' --xephyr --network=bridge --pulseaudio --xoverip --home --share=$HOME --sud
 
 # Screenshot
 ![image](https://user-images.githubusercontent.com/11155854/144838310-83643432-8871-43a3-905d-d7b51e1c5445.png)
+
+# Similar project
+
+https://github.com/vufa/deepin-wine-wechat-arch
