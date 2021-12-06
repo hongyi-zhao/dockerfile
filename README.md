@@ -94,14 +94,13 @@ $ x11docker hongyizhao/deepin-wine deepin-terminal
 # Screenshot
 ![image](https://user-images.githubusercontent.com/11155854/144838310-83643432-8871-43a3-905d-d7b51e1c5445.png)
 
-# Similar project
-
-- https://github.com/vufa/deepin-wine-wechat-arch
-- https://github.com/mviereck/dockerfile-x11docker-deepin
-
 # Run the latest official version of Windows applications, such as wechat, through Deepin-Wine directly (Not recommended)
 ```
 $ Curl -O https://dldir1.qq.com/weixin/Windows/WeChatSetup.exe
 $ deepin-wine6-stable WeChatSetup.exe
 $ LC_ALL=zh_CN.UTF-8 deepin-wine6-stable ~/.wine/drive_c/Program\ Files/Tencent/WeChat/WeChat.exe
 ```
+# Similar project
+
+- https://github.com/vufa/deepin-wine-wechat-arch
+- https://github.com/mviereck/dockerfile-x11docker-deepin
