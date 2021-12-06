@@ -50,7 +50,16 @@ WeChat can be started in container with: `/opt/apps/com.qq.weixin.deepin/files/r
 RUN cp /opt/apps/com.qq.weixin.deepin/entries/applications/com.qq.weixin.deepin.desktop /usr/share/applications/
 ```
 
-# Extend the base image
+# Build docker images from the Dockerfile manually
+
+```
+# Build the base image:
+$ cd x11docker-deepin && bash build.sh
+# Build the extened image which includes WeChat and QQ:
+$ cd x11docker-deepin-wine && bash build.sh
+```
+
+## Extend the base image as you wish:
 To add your desired applications, create and build from a custom Dockerfile with this image as a base. Example with `firefox`:
 ```
 FROM hongyizhao/deepin
@@ -59,12 +68,6 @@ RUN apt-get update && \
     apt-get clean
 ```
 
-# Build docker images from the Dockerfile manually
-
-```
-$ cd x11docker-deepin && bash build.sh
-$ cd x11docker-deepin-wine && bash build.sh
-```
 
 # Run the image using x11docker
 
