@@ -1,4 +1,4 @@
-# Check the dockerfile
+# Validate the dockerfile
 
 With [hadolint](https://github.com/hadolint/hadolint/issues/506):
 ```
