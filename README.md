@@ -17,7 +17,7 @@ https-proxy=http://127.0.0.1:8080
 $ dockerfilelint < Dockerfile
 ```
      
-# x11docker/deepin
+# Run with x11docker
 
 Use [x11docker](https://github.com/mviereck/x11docker) to run [deepin desktop](https://www.deepin.org) in a Docker container. The docker images based on the Dockerfiles in this repo will be generated automatically on [Docker hub](https://hub.docker.com/repositories/docker/hongyizhao) triggered by hook scripts after each commit.
 
@@ -31,23 +31,7 @@ Run single application:
 $ x11docker hongyizhao/deepin-wine deepin-terminal
 ```
 
-# Options:
- - Persistent home folder stored on host with   `--home`
- - Shared host file or folder with              `--share PATH`
- - Hardware acceleration with option            `--gpu`
- - Clipboard sharing with option                `--clipboard`
- - Language locale setting with                 `--lang [=$LANG]`
- - Sound support with                           `--pulseaudio`
- - Printer support with                         `--printer`
- - Webcam support with                          `--webcam`
-
-See `x11docker --help` for further options.
-
-# Known issues
- - The logout button does not respond. To terminate the session either close the X server window or type `systemctl poweroff` in terminal.
- - Configuring the keyboard input method in deepin control center does not work. Use "Fcitx Configuration" in the application menu instead.
-
-# Extend base image
+# Extend the base image
 To add your desired applications, create and build from a custom Dockerfile with this image as a base. Example with `firefox`:
 ```
 FROM x11docker/deepin
