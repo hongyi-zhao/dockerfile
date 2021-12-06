@@ -73,6 +73,13 @@ WeChat can be started in container with: `/opt/apps/com.qq.weixin.deepin/files/r
 RUN cp /opt/apps/com.qq.weixin.deepin/entries/applications/com.qq.weixin.deepin.desktop /usr/share/applications/
 ```
 
+# Build docker images from the Dockerfile manually:
+
+```
+$ cd x11docker-deepin && bash build.sh
+$ cd x11docker-deepin-wine && bash build.sh
+```
+
 # Screenshot
 
 ![screenshot](https://raw.githubusercontent.com/mviereck/x11docker/screenshots/screenshot-deepin.png "deepin desktop running in Weston+Xwayland window using x11docker")
