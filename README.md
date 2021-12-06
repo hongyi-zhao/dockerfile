@@ -80,6 +80,22 @@ $ cd x11docker-deepin && bash build.sh
 $ cd x11docker-deepin-wine && bash build.sh
 ```
 
+# Run the image with x11docker:
+
+```
+$ pyenv shell 3.9.7
+$ x11docker --runasroot 'sed -r "s/^[[:blank:]]*[|]//" <<-EOF > /etc/sudoers
+        |#$ sudo grep -Ev '\''^[ ]*(#|$)'\'' /etc/sudoers  
+        |Defaultsenv_reset
+        |Defaultsmail_badpass
+        |Defaultssecure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin"
+        |rootlesskitALL=(ALL:ALL) ALL
+        |%admin ALL=(ALL) ALL
+        |%sudoALL=(ALL:ALL) ALL
+        |$USER ALL=(ALL) NOPASSWD:ALL
+EOF' --xephyr --network=bridge --pulseaudio --xoverip --home --share=$HOME --sudouser -c --desktop --init=systemd -- --device /dev/mem:/dev/mem --cap-add=ALL -- hongyizhao/deepin-wine:latest
+```
+
 # Screenshot
 
 ![screenshot](https://raw.githubusercontent.com/mviereck/x11docker/screenshots/screenshot-deepin.png "deepin desktop running in Weston+Xwayland window using x11docker")
