@@ -41,16 +41,13 @@ RUN apt-get update && \
 ```
 
 ## deepin repository
-Some applications has been outsourced from the official deepin repository, noteable many Windows applications running with wine.
-They are still available in a [community repository](https://www.deepin.org/en/2020/11/19/statements/).
-Another community repository outside of China is [located in Spain](https://deepinenespañol.org/en/improve-the-speed-of-the-deepin-20-beta-repository/).
-For new image building, the following repositories can be used, see [here](https://github.com/mviereck/dockerfile-x11docker-deepin/issues/38#issuecomment-737253563) for more infomation:
+See [here](https://www.deepin.org/en/2020/11/19/statements/), [here](https://wiki.deepin.org/wiki/Software_source) and [here](https://github.com/mviereck/dockerfile-x11docker-deepin/issues/38#issuecomment-737253563) for more infomation:
 ```
 FROM x11docker/deepin
 
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 1C30362C0A53D5BB && \
-    echo "deb https://mirrors.ustc.edu.cn/deepin apricot main contrib non-free"  > /etc/apt/sources.list && \
-    echo "deb https://mirror.deepines.com/testing/appstore apricot appstore" > /etc/apt/sources.list.d/appstore.list && \
+    echo "deb [trusted=yes by-hash=force] https://mirrors.ustc.edu.cn/deepin apricot main contrib non-free"  > /etc/apt/sources.list && \
+    echo "deb [trusted=yes by-hash=force] https://community-packages.deepin.com/deepin apricot main contrib non-free" > /etc/apt/sources.list.d/appstore.list && \
     apt-get update
 ```
 
