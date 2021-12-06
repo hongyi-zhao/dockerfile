@@ -55,7 +55,7 @@ RUN cp /opt/apps/com.qq.weixin.deepin/entries/applications/com.qq.weixin.deepin.
 ```
 # Build the base image:
 $ cd x11docker-deepin && bash build.sh
-# Build the extened image which includes WeChat and QQ:
+# Build the extended image including wechat, QQ, Tencent Meeting and so on:
 $ cd x11docker-deepin-wine && bash build.sh
 ```
 
