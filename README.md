@@ -53,10 +53,7 @@ RUN cp /opt/apps/com.qq.weixin.deepin/entries/applications/com.qq.weixin.deepin.
 # Build docker images from the Dockerfile manually
 
 ```
-# Build the base image:
-$ cd x11docker-deepin && bash build.sh
-# Build the extended image including wechat, QQ, Tencent Meeting and so on:
-$ cd x11docker-deepin-wine && bash build.sh
+$ bash build.sh
 ```
 
 ## Extend the base image as you wish:
@@ -74,6 +71,7 @@ RUN apt-get update && \
 Use [x11docker](https://github.com/mviereck/x11docker) to run [deepin desktop](https://www.deepin.org) in a Docker container. The docker images based on the Dockerfiles in this repo will be generated automatically on [Docker hub](https://hub.docker.com/repositories/docker/hongyizhao) triggered by hook scripts after each commit.
 
 ```
+$ . environment
 $ pyenv shell 3.9.7
 # Run desktop:
 $ x11docker --runasroot 'sed -r "s/^[[:blank:]]*[|]//" <<-EOF > /etc/sudoers
@@ -85,7 +83,7 @@ $ x11docker --runasroot 'sed -r "s/^[[:blank:]]*[|]//" <<-EOF > /etc/sudoers
         |%admin ALL=(ALL) ALL
         |%sudoALL=(ALL:ALL) ALL
         |$USER ALL=(ALL) NOPASSWD:ALL
-EOF' --xephyr --network=bridge --pulseaudio --xoverip --home --share=$HOME --sudouser -c --desktop --init=systemd -- --device /dev/mem:/dev/mem --cap-add=ALL -- hongyizhao/deepin-wine:latest
+EOF' --xephyr --network=bridge --pulseaudio --xoverip --home --share=$HOME --sudouser -c --desktop --init=systemd -- --device /dev/mem:/dev/mem --cap-add=ALL -- hongyizhao/deepin-wine:${DEEPIN_RELEASE}
 
 # Run single application:
 $ x11docker hongyizhao/deepin-wine deepin-terminal
