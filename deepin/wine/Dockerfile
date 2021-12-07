@@ -1,7 +1,6 @@
-#https://www.deepin.org/en/2020/11/19/statements/
-#https://github.com/mviereck/dockerfile-x11docker-deepin#deepin-community-repository
-
-FROM hongyizhao/deepin
+#https://www.jeffgeerling.com/blog/2017/use-arg-dockerfile-dynamic-image-specification
+ARG DEEPIN_BASE_IMAGE
+FROM $DEEPIN_BASE_IMAGE
 #The following variables only existing in the current stage during the building time: 
 ARG DEEPIN_MIRROR
 ARG DEEPIN_RELEASE
