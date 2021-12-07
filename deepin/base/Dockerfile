@@ -1,27 +1,3 @@
-# x11docker/deepin
-# 
-# Run deepin desktop in a Docker container. 
-# Use x11docker to run image: 
-#   https://github.com/mviereck/x11docker 
-#
-# Run deepin desktop with:
-#   x11docker --desktop --init=systemd -- --cap-add=IPC_LOCK -- x11docker/deepin
-#
-# Run single application:
-#   x11docker x11docker/deepin deepin-terminal
-#
-# Options:
-# Persistent home folder stored on host with   --home
-# Share host file or folder with option        --share PATH
-# Hardware acceleration with option            --gpu
-# Clipboard sharing with option                --clipboard
-# Language locale setting with option          --lang [=$LANG]
-# Sound support with option                    --pulseaudio
-# Printer support with option                  --printer
-# Webcam support with option                   --webcam
-#
-# See x11docker --help for further options.
-
 #https://docs.docker.com/engine/reference/commandline/build/#set-build-time-variables---build-arg
 #https://docs.docker.com/engine/reference/builder/#arg
 #https://docs.docker.com/engine/reference/builder/#scope
@@ -36,13 +12,6 @@ ARG DEEPIN_RELEASE
 # The variables defined with ENV will be available after the image has been built:
 # Choose a deepin mirror close to your location.
 # Many further mirrors are listed at: https://www.deepin.org/en/mirrors/packages
-#ENV DEEPIN_MIRROR=http://mirrors.kernel.org/deepin
-
-#ENV DEEPIN_MIRROR=http://packages.deepin.com/deepin
-#ENV DEEPIN_MIRROR=https://community-packages.deepin.com/deepin
-#ENV DEEPIN_MIRROR=http://mirrors.ustc.edu.cn/deepin
-#ENV DEEPIN_MIRROR=https://mirror.deepines.com/deepin
-
 
 # prepare sources and keys
 #The variables introduced by env command only available in the layer of this RUN instruction:
@@ -156,7 +125,7 @@ RUN apt-get update && \
         bash-completion libpulse0 pulseaudio vlc \
         uuid equivs unrar lsb-release \
         xfonts-wqy fonts-wqy-microhei fonts-wqy-zenhei nano gedit gedit-plugins vim xclip xsel && \
-    /cleanup    
+    /cleanup
 
 
 # Replace closed source package deepin-user-experience-daemon (spyware?) with an empty fake package.

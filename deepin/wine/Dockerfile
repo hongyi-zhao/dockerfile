@@ -8,13 +8,6 @@ ARG DEEPIN_RELEASE
 # The variables defined with ENV will be available after the image has been built:
 # Choose a deepin mirror close to your location.
 # Many further mirrors are listed at: https://www.deepin.org/en/mirrors/packages
-#ENV DEEPIN_MIRROR=http://mirrors.kernel.org/deepin
-
-#ENV DEEPIN_MIRROR=http://packages.deepin.com/deepin
-#ENV DEEPIN_MIRROR=https://community-packages.deepin.com/deepin
-#ENV DEEPIN_MIRROR=http://mirrors.ustc.edu.cn/deepin
-#ENV DEEPIN_MIRROR=https://mirror.deepines.com/deepin
-
 
 #https://github.com/mviereck/dockerfile-x11docker-deepin/issues/29#issuecomment-734294959
 #I've added this to x11docker, always done now without an option. So it fixes x11docker/cinnamon and x11docker/gnome as well.
