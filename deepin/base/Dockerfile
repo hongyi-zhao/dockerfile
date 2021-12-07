@@ -6,9 +6,10 @@
 #### stage 0: debian, debootstrap ####
 FROM debian
 #The following variables only existing in the current stage during the building time: 
+ARG OPENSOURCE_MIRROR
 ARG DEEPIN_REPOSITORY
 ARG DEEPIN_RELEASE
-ARG SOURCE_MIRROR=mirrors.tuna.tsinghua.edu.cn
+
 
 # The variables defined with ENV will be available after the image has been built:
 # Choose a deepin mirror close to your location.
@@ -34,7 +35,7 @@ ARG SOURCE_MIRROR=mirrors.tuna.tsinghua.edu.cn
 #       --keyserver-options {name=value}
 
 
-RUN sed -ri "s|^(deb(-src)?[[:blank:]]+https?://)([^/]+)|\1${SOURCE_MIRROR}|" /etc/apt/sources.list && \
+RUN sed -ri "s|^(deb(-src)?[[:blank:]]+https?://)([^/]+)|\1${OPENSOURCE_MIRROR}|" /etc/apt/sources.list && \
     apt-get update && \
     env DEBIAN_FRONTEND=noninteractive apt-get install -y debootstrap gnupg
 

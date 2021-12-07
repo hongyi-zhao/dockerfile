@@ -3,11 +3,13 @@
 . environment
 
 docker build --network host --build-arg http_proxy='' --build-arg https_proxy='' \
+             --build-arg OPENSOURCE_MIRROR=${OPENSOURCE_MIRROR} \
              --build-arg DEEPIN_REPOSITORY=${DEEPIN_REPOSITORY} \
              --build-arg DEEPIN_RELEASE=${DEEPIN_RELEASE} \
              -t hongyizhao/deepin:${DEEPIN_RELEASE} -f base/Dockerfile .
 
 docker build --network host --build-arg http_proxy='' --build-arg https_proxy='' \
+             --build-arg OPENSOURCE_MIRROR=${OPENSOURCE_MIRROR} \
              --build-arg DEEPIN_REPOSITORY=${DEEPIN_REPOSITORY} \
              --build-arg DEEPIN_APPSTORE_REPOSITORY=${DEEPIN_APPSTORE_REPOSITORY} \
              --build-arg DEEPIN_PRINTER_REPOSITORY=${DEEPIN_PRINTER_REPOSITORY} \

@@ -4,7 +4,8 @@
 #https://github.com/mviereck/dockerfile-x11docker-deepin/issues/25#issuecomment-732643390
 #https://www.deepin.org/zh/2020/08/06/deepin-system-updates-2020-08-06/
 #https://www.deepin.org/en/2020/11/19/statements/
-DEEPIN_REPOSITORY=https://mirrors.tuna.tsinghua.edu.cn/deepin
+OPENSOURCE_MIRROR=mirrors.tuna.tsinghua.edu.cn
+DEEPIN_REPOSITORY=https://$OPENSOURCE_MIRROR/deepin
 DEEPIN_PRINTER_REPOSITORY=https://community-packages.deepin.com/printer
 DEEPIN_APPSTORE_REPOSITORY=https://community-store-packages.deepin.com/appstore
 
