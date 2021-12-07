@@ -22,8 +22,8 @@ See [here](https://github.com/mviereck/dockerfile-x11docker-deepin/issues/25#iss
 
 ```
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com --recv-keys 1C30362C0A53D5BB && \
-    echo "deb ${DEEPIN_MIRROR} ${DEEPIN_RELEASE} main contrib non-free\n\
-deb-src ${DEEPIN_MIRROR} ${DEEPIN_RELEASE} main contrib non-free\n\
+    echo "deb ${DEEPIN_REPOSITORY} ${DEEPIN_RELEASE} main contrib non-free\n\
+deb-src ${DEEPIN_REPOSITORY} ${DEEPIN_RELEASE} main contrib non-free\n\
 deb https://community-packages.deepin.com/printer eagle non-free\n\
 deb https://community-store-packages.deepin.com/appstore apricot appstore\n\
 " > /etc/apt/sources.list

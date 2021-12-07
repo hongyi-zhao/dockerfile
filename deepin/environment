@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 
 # The official packages repository and community packages repository mirrors are listed at: https://www.deepin.org/en/mirrors/packages/
-DEEPIN_MIRROR=https://mirrors.tuna.tsinghua.edu.cn/deepin
+#https://github.com/mviereck/dockerfile-x11docker-deepin/issues/25#issuecomment-732643390
+#https://www.deepin.org/zh/2020/08/06/deepin-system-updates-2020-08-06/
+#https://www.deepin.org/en/2020/11/19/statements/
+DEEPIN_REPOSITORY=https://mirrors.tuna.tsinghua.edu.cn/deepin
+DEEPIN_PRINTER_REPOSITORY=https://community-packages.deepin.com/printer
+DEEPIN_APPSTORE_REPOSITORY=https://community-store-packages.deepin.com/appstore
 
 #https://docs.docker.com/docker-hub/builds/advanced/#environment-variables-for-building-and-testing
 
@@ -14,4 +19,5 @@ DEEPIN_MIRROR=https://mirrors.tuna.tsinghua.edu.cn/deepin
 #    IMAGE_NAME: the name and tag of the Docker repository being built. (This variable is a combination of DOCKER_REPO:DOCKER_TAG.)
 
 DEEPIN_RELEASE=apricot
+DEEPIN_PRINTER_RELEASE=eagle
 

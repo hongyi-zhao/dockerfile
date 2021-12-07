@@ -6,7 +6,7 @@
 #### stage 0: debian, debootstrap ####
 FROM debian
 #The following variables only existing in the current stage during the building time: 
-ARG DEEPIN_MIRROR
+ARG DEEPIN_REPOSITORY
 ARG DEEPIN_RELEASE
 
 # The variables defined with ENV will be available after the image has been built:
@@ -33,7 +33,7 @@ ARG DEEPIN_RELEASE
 #       --keyserver-options {name=value}
 
 
-RUN sed -ri "s|^(deb(-src)?[[:blank:]]+https?://)([^/]+)|\1$(echo $DEEPIN_MIRROR | cut -d '/' -f3)|" /etc/apt/sources.list && \
+RUN sed -ri "s|^(deb(-src)?[[:blank:]]+https?://)([^/]+)|\1$(echo $DEEPIN_REPOSITORY | cut -d '/' -f3)|" /etc/apt/sources.list && \
     apt-get update && \
     env DEBIAN_FRONTEND=noninteractive apt-get install -y \
         debootstrap \
@@ -41,8 +41,8 @@ RUN sed -ri "s|^(deb(-src)?[[:blank:]]+https?://)([^/]+)|\1$(echo $DEEPIN_MIRROR
     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 425956BB3E31DF51 && \
     mkdir -p /rootfs/etc/apt && \
     cp /etc/apt/trusted.gpg /rootfs/etc/apt/trusted.gpg && \
-    echo "deb $DEEPIN_MIRROR $DEEPIN_RELEASE main contrib non-free\n\
-deb-src $DEEPIN_MIRROR $DEEPIN_RELEASE main contrib non-free\n\
+    echo "deb $DEEPIN_REPOSITORY $DEEPIN_RELEASE main contrib non-free\n\
+deb-src $DEEPIN_REPOSITORY $DEEPIN_RELEASE main contrib non-free\n\
 " > /rootfs/etc/apt/sources.list
 
 
@@ -81,7 +81,7 @@ variants - buildd fakechroot minbase\n\
 . /usr/share/debootstrap/scripts/debian-common\n\
 " > /usr/share/debootstrap/scripts/$DEEPIN_RELEASE
 
-RUN debootstrap --variant=minbase --arch=amd64 $DEEPIN_RELEASE /rootfs $DEEPIN_MIRROR && \
+RUN debootstrap --variant=minbase --arch=amd64 $DEEPIN_RELEASE /rootfs $DEEPIN_REPOSITORY && \
     chroot ./rootfs apt-get update && \
     chroot ./rootfs env DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y && \
     chroot ./rootfs /cleanup

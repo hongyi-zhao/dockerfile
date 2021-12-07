@@ -2,8 +2,12 @@
 ARG DEEPIN_BASE_IMAGE
 FROM $DEEPIN_BASE_IMAGE
 #The following variables only existing in the current stage during the building time: 
-ARG DEEPIN_MIRROR
+ARG DEEPIN_REPOSITORY
+ARG DEEPIN_APPSTORE_REPOSITORY
+ARG DEEPIN_PRINTER_REPOSITORY
 ARG DEEPIN_RELEASE
+ARG DEEPIN_PRINTER_RELEASE
+
 
 # The variables defined with ENV will be available after the image has been built:
 # Choose a deepin mirror close to your location.
@@ -29,14 +33,11 @@ ARG DEEPIN_RELEASE
 #sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com --recv 1C30362C0A53D5BB
 
 
-#https://github.com/mviereck/dockerfile-x11docker-deepin/issues/25#issuecomment-732643390
-#https://www.deepin.org/zh/2020/08/06/deepin-system-updates-2020-08-06/
-#https://www.deepin.org/en/2020/11/19/statements/
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com --recv-keys 1C30362C0A53D5BB && \
-    echo "deb ${DEEPIN_MIRROR} ${DEEPIN_RELEASE} main contrib non-free\n\
-deb-src ${DEEPIN_MIRROR} ${DEEPIN_RELEASE} main contrib non-free\n\
-deb https://community-packages.deepin.com/printer eagle non-free\n\
-deb https://community-store-packages.deepin.com/appstore apricot appstore\n\
+    echo "deb ${DEEPIN_REPOSITORY} ${DEEPIN_RELEASE} main contrib non-free\n\
+deb-src ${DEEPIN_REPOSITORY} ${DEEPIN_RELEASE} main contrib non-free\n\
+deb ${DEEPIN_PRINTER_REPOSITORY} ${DEEPIN_PRINTER_RELEASE} non-free\n\
+deb ${DEEPIN_APPSTORE_REPOSITORY} ${DEEPIN_RELEASE} appstore\n\
 " > /etc/apt/sources.list && \
     dpkg --add-architecture i386 && \
     apt-get update && \
