@@ -8,6 +8,7 @@ FROM debian
 #The following variables only existing in the current stage during the building time: 
 ARG DEEPIN_REPOSITORY
 ARG DEEPIN_RELEASE
+ARG SOURCE_MIRROR=mirrors.tuna.tsinghua.edu.cn
 
 # The variables defined with ENV will be available after the image has been built:
 # Choose a deepin mirror close to your location.
@@ -33,18 +34,9 @@ ARG DEEPIN_RELEASE
 #       --keyserver-options {name=value}
 
 
-RUN sed -ri "s|^(deb(-src)?[[:blank:]]+https?://)([^/]+)|\1$(echo $DEEPIN_REPOSITORY | cut -d '/' -f3)|" /etc/apt/sources.list && \
+RUN sed -ri "s|^(deb(-src)?[[:blank:]]+https?://)([^/]+)|\1${SOURCE_MIRROR}|" /etc/apt/sources.list && \
     apt-get update && \
-    env DEBIAN_FRONTEND=noninteractive apt-get install -y \
-        debootstrap \
-        gnupg && \
-    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 425956BB3E31DF51 && \
-    mkdir -p /rootfs/etc/apt && \
-    cp /etc/apt/trusted.gpg /rootfs/etc/apt/trusted.gpg && \
-    echo "deb $DEEPIN_REPOSITORY $DEEPIN_RELEASE main contrib non-free\n\
-deb-src $DEEPIN_REPOSITORY $DEEPIN_RELEASE main contrib non-free\n\
-" > /rootfs/etc/apt/sources.list
-
+    env DEBIAN_FRONTEND=noninteractive apt-get install -y debootstrap gnupg
 
 #https://www.tutorialfor.com/blog-274404.htm
 #https://stackoverflow.com/questions/33439230/how-to-write-commands-with-multiple-lines-in-dockerfile-while-preserving-the-new
@@ -63,7 +55,8 @@ deb-src $DEEPIN_REPOSITORY $DEEPIN_RELEASE main contrib non-free\n\
 
 
 # cleanup script for use after apt-get
-RUN echo '#!/bin/sh\n\
+RUN mkdir -p /rootfs && \
+    echo '#!/bin/sh\n\
 env DEBIAN_FRONTEND=noninteractive apt-get autoremove -y\n\
 apt-get clean\n\
 find /var/lib/apt/lists -type f -delete\n\
@@ -81,20 +74,30 @@ variants - buildd fakechroot minbase\n\
 . /usr/share/debootstrap/scripts/debian-common\n\
 " > /usr/share/debootstrap/scripts/$DEEPIN_RELEASE
 
-RUN debootstrap --variant=minbase --arch=amd64 $DEEPIN_RELEASE /rootfs $DEEPIN_REPOSITORY && \
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 425956BB3E31DF51 && \
+    mkdir -p /rootfs/etc/apt && \
+    cp /etc/apt/trusted.gpg /rootfs/etc/apt/trusted.gpg && \
+    debootstrap --variant=minbase --arch=amd64 $DEEPIN_RELEASE /rootfs $DEEPIN_REPOSITORY && \
     chroot ./rootfs apt-get update && \
     chroot ./rootfs env DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y && \
     chroot ./rootfs /cleanup
 
 #### stage 1: deepin ####
 FROM scratch
+#The following variables only existing in the current stage during the building time: 
+ARG DEEPIN_REPOSITORY
+ARG DEEPIN_RELEASE
+
 COPY --from=0 /rootfs /
 
 ENV SHELL=/bin/bash
 ENV LANG=en_US.UTF-8
 
 # basics
-RUN apt-get update && \
+RUN echo "deb $DEEPIN_REPOSITORY $DEEPIN_RELEASE main contrib non-free\n\
+deb-src $DEEPIN_REPOSITORY $DEEPIN_RELEASE main contrib non-free\n\
+" > /etc/apt/sources.list && \
+    apt-get update && \
     env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
         apt-transport-https \
         ca-certificates \
@@ -151,15 +154,16 @@ Provides: deepin-user-experience-daemon\n\
 # deepin desktop
 # Dependencies taken from 'apt show dde'
 # (excluded: dde-session-ui deepin-manual eject plymouth-theme-deepin-logo dde-printer deepin-screensaver)
+#https://www.deepin.org/en/dde/
 RUN apt-get update && \
     env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+        dde-file-manager \
+        dde-dock \
+        dde-kwin \
+        dde-launcher \
         dde-control-center \
         dde-clipboard \
         dde-desktop \
-        dde-dock \
-        dde-file-manager \
-        dde-kwin \
-        dde-launcher \
         dde-qt5integration \
         deepin-artwork \
         deepin-default-settings \
