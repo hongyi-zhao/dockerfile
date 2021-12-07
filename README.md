@@ -1,4 +1,4 @@
-# Validate the dockerfile
+## Validate the dockerfile
 
 With [hadolint](https://github.com/hadolint/hadolint/issues/506):
 ```
@@ -17,7 +17,7 @@ https-proxy=http://127.0.0.1:8080
 $ dockerfilelint < Dockerfile
 ```
 
-# Deepin repository
+## Deepin repository
 See [here](https://github.com/mviereck/dockerfile-x11docker-deepin/issues/25#issuecomment-732643390), [here](https://www.deepin.org/zh/2020/08/06/deepin-system-updates-2020-08-06/), and [here](https://www.deepin.org/en/2020/11/19/statements/) for more detailed infomartion. [The currently used configuration](https://github.com/hongyi-zhao/dockerfile/blob/7556649d60bc8a64693338fe1d965a99db744a09/x11docker-deepin-wine/Dockerfile#L43) is as follows:
 
 ```
@@ -50,13 +50,13 @@ WeChat can be started in container with: `/opt/apps/com.qq.weixin.deepin/files/r
 RUN cp /opt/apps/com.qq.weixin.deepin/entries/applications/com.qq.weixin.deepin.desktop /usr/share/applications/
 ```
 
-# Build docker images from the Dockerfile manually
+## Build docker images from the Dockerfile manually
 
 ```
 $ cd deepin && bash build.sh
 ```
 
-## Extend the base image as you wish:
+### Extend the base image as you wish:
 To add your desired applications, create and build from a custom Dockerfile with this image as a base. Example with `firefox`:
 ```
 FROM hongyizhao/deepin
@@ -66,7 +66,7 @@ RUN apt-get update && \
 ```
 
 
-# Run the image using x11docker
+## Run the image using x11docker
 
 Use [x11docker](https://github.com/mviereck/x11docker) to run [deepin desktop](https://www.deepin.org) in a Docker container. The docker images based on the Dockerfiles in this repo will be generated automatically on [Docker hub](https://hub.docker.com/repositories/docker/hongyizhao) triggered by hook scripts after each commit.
 
@@ -88,20 +88,20 @@ EOF' --xephyr --network=bridge --pulseaudio --xoverip --home --share=$HOME --sud
 # Run single application:
 $ x11docker hongyizhao/deepin-wine deepin-terminal
 ```
-# Screenshot
+## Screenshot
 ![image](https://user-images.githubusercontent.com/11155854/144838310-83643432-8871-43a3-905d-d7b51e1c5445.png)
 
-# Run the latest official version of Windows applications, such as wechat, through Deepin-Wine directly (Not recommended)
+## Run the latest official version of Windows applications, such as wechat, through Deepin-Wine directly (Not recommended)
 ```
 $ Curl -O https://dldir1.qq.com/weixin/Windows/WeChatSetup.exe
 $ deepin-wine6-stable WeChatSetup.exe
 $ LC_ALL=zh_CN.UTF-8 deepin-wine6-stable ~/.wine/drive_c/Program\ Files/Tencent/WeChat/WeChat.exe
 ```
-# Similar project
+## Similar project
 - https://github.com/vufa/deepin-wine-wechat-arch
 - https://github.com/mviereck/dockerfile-x11docker-deepin
 
-# Application development workflows
+## Application development workflows
 - https://github.com/pricing#compare-features
 - https://event-driven.io/en/how_to_buid_and_push_docker_image_with_github_actions/
 - https://github.com/marketplace/actions/build-and-push-docker-images
