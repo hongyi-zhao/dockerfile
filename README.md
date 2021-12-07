@@ -53,7 +53,7 @@ RUN cp /opt/apps/com.qq.weixin.deepin/entries/applications/com.qq.weixin.deepin.
 # Build docker images from the Dockerfile manually
 
 ```
-$ bash build.sh
+$ cd deepin && bash build.sh
 ```
 
 ## Extend the base image as you wish:
