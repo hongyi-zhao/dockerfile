@@ -114,7 +114,7 @@ RUN apt-get update && \
         x11-xserver-utils && \
     /cleanup
     
-# Some additional tools comes here:
+# Some additional tools:
 RUN apt-get update && \
     env DEBIAN_FRONTEND=noninteractive apt-get install -y \
         iproute2 iptables iputils-ping iputils-tracepath \
