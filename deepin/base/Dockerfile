@@ -33,8 +33,6 @@ ARG DEEPIN_RELEASE
 #              This option is deprecated - please use the --keyserver in ‘dirm‐
 #              provided.  These  are the same as the global --keyserver-options
 #       --keyserver-options {name=value}
-
-
 RUN sed -ri "s|^(deb(-src)?[[:blank:]]+https?://)([^/]+)|\1${OPENSOURCE_MIRROR}|" /etc/apt/sources.list && \
     apt-get update && \
     env DEBIAN_FRONTEND=noninteractive apt-get install -y debootstrap gnupg
@@ -55,17 +53,6 @@ RUN sed -ri "s|^(deb(-src)?[[:blank:]]+https?://)([^/]+)|\1${OPENSOURCE_MIRROR}|
 #" > blabla
 
 
-# cleanup script for use after apt-get
-RUN mkdir -p /rootfs && \
-    echo '#!/bin/sh\n\
-env DEBIAN_FRONTEND=noninteractive apt-get autoremove -y\n\
-apt-get clean\n\
-find /var/lib/apt/lists -type f -delete\n\
-find /var/cache -type f -delete\n\
-find /var/log -type f -delete\n\
-exit 0\n\
-' > /rootfs/cleanup && chmod +x /rootfs/cleanup
-
 # debootstrap script
 RUN mkdir -p /usr/share/debootstrap/scripts && \
     echo "mirror_style release\n\
@@ -80,8 +67,7 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 425956BB3E31DF51 &&
     cp /etc/apt/trusted.gpg /rootfs/etc/apt/trusted.gpg && \
     debootstrap --variant=minbase --arch=amd64 $DEEPIN_RELEASE /rootfs $DEEPIN_REPOSITORY && \
     chroot ./rootfs apt-get update && \
-    chroot ./rootfs env DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y && \
-    chroot ./rootfs /cleanup
+    chroot ./rootfs env DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y
 
 #### stage 1: deepin ####
 FROM scratch
@@ -90,6 +76,17 @@ ARG DEEPIN_REPOSITORY
 ARG DEEPIN_RELEASE
 
 COPY --from=0 /rootfs /
+
+# cleanup script for use after apt-get
+RUN echo '#!/bin/sh\n\
+env DEBIAN_FRONTEND=noninteractive apt-get autoremove -y\n\
+apt-get clean\n\
+find /var/lib/apt/lists -type f -delete\n\
+find /var/cache -type f -delete\n\
+find /var/log -type f -delete\n\
+exit 0\n\
+' > /cleanup && chmod +x /cleanup
+
 
 ENV SHELL=/bin/bash
 ENV LANG=en_US.UTF-8
@@ -126,7 +123,7 @@ RUN apt-get update && \
         ncat socat connect-proxy haproxy tcpdump pv iftop iperf3 firefox-esr \
         build-essential gcc make cmake git curl gawk \
         apt-file apt-transport-https apt-utils gdebi synaptic \
-        bash-completion libpulse0 pulseaudio vlc \
+        bash-completion libpulse0 pulseaudio \
         uuid equivs unrar lsb-release \
         xfonts-wqy fonts-wqy-microhei fonts-wqy-zenhei nano gedit gedit-plugins vim xclip xsel && \
     /cleanup
@@ -152,10 +149,9 @@ Provides: deepin-user-experience-daemon\n\
     rm deepin-user-experience* && \
     /cleanup
 
-# deepin desktop
-# Dependencies taken from 'apt show dde'
-# (excluded: dde-session-ui deepin-manual eject plymouth-theme-deepin-logo dde-printer deepin-screensaver)
-#https://www.deepin.org/en/dde/
+    
+# deepin desktop    
+#https://github.com/mviereck/dockerfile-x11docker-deepin/blob/1267c2f20adacf2b0a96b1786bded22b75ff6ba6/Dockerfile#L121
 RUN apt-get update && \
     env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
         dde-file-manager \
@@ -173,6 +169,7 @@ RUN apt-get update && \
         fonts-noto \
         startdde && \
     /cleanup
+    
 
 # additional applications
 RUN apt-get update && \
@@ -192,6 +189,7 @@ RUN apt-get update && \
         oneko \
         sudo && \
     /cleanup
+    
     
 # fcitx: Chinese input support
 #ENV XMODIFIERS=@im=fcitx QT4_IM_MODULE=fcitx QT_IM_MODULE=fcitx GTK_IM_MODULE=fcitx
