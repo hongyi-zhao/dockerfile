@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 . environment
 
 docker build --network host --build-arg http_proxy='' --build-arg https_proxy='' \
