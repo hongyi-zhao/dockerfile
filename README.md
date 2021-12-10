@@ -20,6 +20,32 @@ $ dockerfilelint < Dockerfile
 ## Repositories
 See the [files](https://github.com/hongyi-zhao/dockerfile/tree/master/deepin/etc/apt) obtained from the desktop environment installed with deepin-desktop-community-20.3-amd64.iso.
 
+## Determine the dependency package list for the deep desktop environment
+
+See [here](https://github.com/mviereck/dockerfile-x11docker-deepin/issues/25#issuecomment-731782023) for some relevant discussion.
+```
+$ sudo mount deepin-desktop-community-20.3-amd64.iso /mnt
+$ grep -A22 \"dde\": /mnt/live/packages_choice.json | egrep -v '\[|\]' | tr '",' '\n' | sed -re '/^[ ]*$/d' | egrep -v '^(dde|dde-session-ui|plymouth-theme-deepin-logo)$'  
+deepin-desktop-server
+deepin-default-settings
+dde-desktop
+dde-dock
+dde-launcher
+dde-control-center
+startdde
+deepin-artwork
+dde-file-manager
+dde-qt5integration
+deepin-wallpapers
+fonts-noto
+dde-introduction
+dde-kwin
+deepin-screensaver
+dde-calendar
+network-manager-integration-plugins
+deepin-terminal
+```
+
 ## Build docker images from the Dockerfile manually
 
 ```
