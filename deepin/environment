@@ -7,7 +7,16 @@
 OPENSOURCE_MIRROR=mirrors.tuna.tsinghua.edu.cn
 DEEPIN_REPOSITORY=https://$OPENSOURCE_MIRROR/deepin
 DEEPIN_PRINTER_REPOSITORY=https://community-packages.deepin.com/printer
-# The folloiwng info is obtained from the desktop environment installed using deepin-desktop-community-20.3-amd64.iso
+#https://bbs.deepin.org/en/post/226078
+#[App Store] 关于部分用户商店源更新提示 401 没有数字签名的解决办法 
+#sudo dedit /etc/apt/sources.list.d/appstore.list
+#将商店仓库源地址修改为
+## Writtten by deepin-home-appstore-client
+#deb https://com-store-packages.uniontech.com/appstore deepin appstore
+#home-store-packages 开头的这个地址现在给家庭版使用，需要 UOS 系统激活后才能通过强校验。社区版没有激活机制，无法使用该地址。
+# 
+#P.S. 请尽快升级商店至 7.1.0.0019-1 版本，避免旧版本商店写入错误源信息。
+# The folloiwng info can also be obtained from the desktop environment installed using deepin-desktop-community-20.3-amd64.iso
 DEEPIN_APPSTORE_REPOSITORY=https://com-store-packages.uniontech.com/appstore
 
 DEEPIN_RELEASE=apricot
