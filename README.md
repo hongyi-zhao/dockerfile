@@ -76,5 +76,7 @@ $ LC_ALL=zh_CN.UTF-8 deepin-wine6-stable ~/.wine/drive_c/Program\ Files/Tencent/
 - https://github.com/marketplace/actions/build-and-push-docker-images
 - https://docs.github.com/en/actions/creating-actions/creating-a-docker-container-action
 - https://docs.github.com/en/actions/publishing-packages/publishing-docker-images
+- https://github.com/vufa/deepin-wine-wechat-arch#%E7%94%A8%E5%AE%89%E8%A3%85%E5%8C%85%E5%AE%89%E8%A3%85
+- https://github.com/vufa/deepin-wine-wechat-arch/tree/action/.github/workflows
 
 

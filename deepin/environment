@@ -17,6 +17,7 @@ DEEPIN_PRINTER_REPOSITORY=https://community-packages.deepin.com/printer
 # 
 #P.S. 请尽快升级商店至 7.1.0.0019-1 版本，避免旧版本商店写入错误源信息。
 # The folloiwng info can also be obtained from the desktop environment installed using deepin-desktop-community-20.3-amd64.iso
+# https://github.com/vufa/deepin-wine-wechat-arch/blob/30e2d17da7acf001fa0191e64cb33503e57ab8e5/PKGBUILD#L17
 DEEPIN_APPSTORE_REPOSITORY=https://com-store-packages.uniontech.com/appstore
 
 DEEPIN_RELEASE=apricot

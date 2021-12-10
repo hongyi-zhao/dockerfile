@@ -1,3 +1,4 @@
+# https://gitee.com/daze456/deepin-desktop-docker
 FROM debian AS builder
 
 # 主参数
