@@ -23,7 +23,7 @@ $ dockerfilelint < Dockerfile
 $ cd deepin && bash build.sh
 ```
 
-### Extend the base image as you wish:
+## Extend the base image as you wish:
 To add your desired applications, create and build from a custom Dockerfile with this image as a base. Example with `firefox`:
 ```
 FROM hongyizhao/deepin-desktop:${DEEPIN_RELEASE}
