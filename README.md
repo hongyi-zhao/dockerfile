@@ -23,7 +23,7 @@ $ dockerfilelint < Dockerfile
 $ cd deepin && bash build.sh
 ```
 
-## Extend the base image as you wish:
+## Extend the base image as you wish
 For the definition of related variables, see [here](https://github.com/hongyi-zhao/dockerfile/blob/master/deepin/environment). To add your desired applications, create and build from a custom Dockerfile with this image as a base. Example with `firefox`:
 
 ```
