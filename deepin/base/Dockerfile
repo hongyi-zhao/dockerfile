@@ -1,81 +1,38 @@
-#https://docs.docker.com/engine/reference/commandline/build/#set-build-time-variables---build-arg
-#https://docs.docker.com/engine/reference/builder/#arg
-#https://docs.docker.com/engine/reference/builder/#scope
-#https://docs.docker.com/engine/reference/builder/#using-arg-variables
+FROM debian AS builder
 
-#### stage 0: debian, debootstrap ####
-FROM debian
-#The following variables only existing in the current stage during the building time: 
-ARG OPENSOURCE_MIRROR
-ARG DEEPIN_REPOSITORY
-ARG DEEPIN_RELEASE
+# 主参数
+ARG \
+    # deepin代号
+    DEEPIN_RELEASE \
+    # 软件仓库
+    DEEPIN_REPOSITORY \
+    OPENSOURCE_MIRROR
+    
+# 安装debootstrap
+RUN \
+    sed -ri "s|^(deb(-src)?[[:blank:]]+https?://)([^/]+)|\1${OPENSOURCE_MIRROR}|" /etc/apt/sources.list && \
+    apt update && apt install -y debootstrap
 
+RUN \
+    # 对debootstrap打补丁
+    ln -sf /usr/share/debootstrap/scripts/stable /usr/share/debootstrap/scripts/$DEEPIN_RELEASE && \
+    # 获取根文件系统
+    debootstrap --no-check-gpg --arch=$(dpkg --print-architecture) --include=bash $DEEPIN_RELEASE /rootfs $DEEPIN_REPOSITORY && \
+    # 修复sources.list（启用专有源）
+    echo "deb [by-hash=force] ${DEEPIN_REPOSITORY} ${DEEPIN_RELEASE} main contrib non-free\n\
+deb-src ${DEEPIN_REPOSITORY} ${DEEPIN_RELEASE} main contrib non-free\n\
+" > /rootfs/etc/apt/sources.list && \
+    # 清理
+    rm -rf /rootfs/var/cache/* /rootfs/tmp/* /rootfs/var/log/*
 
-# The variables defined with ENV will be available after the image has been built:
-# Choose a deepin mirror close to your location.
-# Many further mirrors are listed at: https://www.deepin.org/en/mirrors/packages
-
-# prepare sources and keys
-#The variables introduced by env command only available in the layer of this RUN instruction:
-
-#$ man apt-key |egrep -A6 '^[ ]*adv'
-#       adv
-#           Pass advanced options to gpg. With adv --recv-key you can e.g.
-#           download key from keyservers directly into the trusted set of keys.
-#           Note that there are no checks performed, so it is easy to
-#           completely undermine the apt-secure(8) infrastructure if used
-#           without care.
-
-#$ man gpg|egrep -- '--(keyserver|recv-keys)' 
-#       --recv-keys keyIDs
-#                     your  key  from. See --keyserver-options honor-keyserver-
-#       --keyserver name
-#              This option is deprecated - please use the --keyserver in ‘dirm‐
-#              provided.  These  are the same as the global --keyserver-options
-#       --keyserver-options {name=value}
-RUN sed -ri "s|^(deb(-src)?[[:blank:]]+https?://)([^/]+)|\1${OPENSOURCE_MIRROR}|" /etc/apt/sources.list && \
-    apt-get update && \
-    env DEBIAN_FRONTEND=noninteractive apt-get install -y debootstrap gnupg
-
-#https://www.tutorialfor.com/blog-274404.htm
-#https://stackoverflow.com/questions/33439230/how-to-write-commands-with-multiple-lines-in-dockerfile-while-preserving-the-new
-#https://mihamina.rktmb.org/2016/06/dockerfile-multiline-to-file.html
-#https://github.com/moby/moby/issues/1799
-#https://github.com/mviereck/dockerfile-x11docker-deepin/issues/41#issuecomment-739184425
-#docker build can only read one line. \ disables the newline and allows to read multiple lines. Without this the build would fail, just try out.
-#To get newlines with echo in the resulting file I add \n.
-
-#SHELL ["/bin/bash", "-c"]
-#RUN echo $"command substitute `hostname -i` \n\
-##comment line \n\
-#variable expanding or not: \$HOME $HOME \n\
-#single and double quote: ' \" \n\
-#" > blabla
-
-
-# debootstrap script
-RUN mkdir -p /usr/share/debootstrap/scripts && \
-    echo "mirror_style release\n\
-download_style apt\n\
-finddebs_style from-indices\n\
-variants - buildd fakechroot minbase\n\
-. /usr/share/debootstrap/scripts/debian-common\n\
-" > /usr/share/debootstrap/scripts/$DEEPIN_RELEASE
-
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 425956BB3E31DF51 && \
-    mkdir -p /rootfs/etc/apt && \
-    cp /etc/apt/trusted.gpg /rootfs/etc/apt/trusted.gpg && \
-    debootstrap --variant=minbase --arch=amd64 $DEEPIN_RELEASE /rootfs $DEEPIN_REPOSITORY && \
-    chroot ./rootfs apt-get update && \
-    chroot ./rootfs env DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y
-
-#### stage 1: deepin ####
+# 从空镜像开始正式构建
 FROM scratch
-#The following variables only existing in the current stage during the building time: 
-ARG DEEPIN_REPOSITORY
-ARG DEEPIN_RELEASE
+# 署名
+MAINTAINER Hongyi Zhao <hongyi.zhao@gmail.com>
+LABEL maintainer="Hongyi Zhao <hongyi.zhao@gmail.com>"
 
-COPY --from=0 /rootfs /
+# 提取rootfs
+COPY --from=builder /rootfs /
 
 # cleanup script for use after apt-get
 RUN echo '#!/bin/sh\n\
@@ -92,10 +49,7 @@ ENV SHELL=/bin/bash
 ENV LANG=en_US.UTF-8
 
 # basics
-RUN echo "deb $DEEPIN_REPOSITORY $DEEPIN_RELEASE main contrib non-free\n\
-deb-src $DEEPIN_REPOSITORY $DEEPIN_RELEASE main contrib non-free\n\
-" > /etc/apt/sources.list && \
-    apt-get update && \
+RUN apt-get update && \
     env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
         apt-transport-https \
         ca-certificates \
@@ -112,7 +66,8 @@ deb-src $DEEPIN_REPOSITORY $DEEPIN_RELEASE main contrib non-free\n\
         psmisc \
         xdg-utils \
         x11-xkb-utils \
-        x11-xserver-utils && \
+        x11-xserver-utils \
+        deepin-terminal sudo && \
     /cleanup
     
 # Some additional tools:
@@ -149,8 +104,8 @@ Provides: deepin-user-experience-daemon\n\
     rm deepin-user-experience* && \
     /cleanup
 
-    
-# deepin desktop    
+# deepin desktop
+#https://github.com/mviereck/test/blob/bd1cf7f313e85827274da40ae12ea0c99dd4f0cd/Dockerfile#L103
 #https://github.com/mviereck/dockerfile-x11docker-deepin/blob/1267c2f20adacf2b0a96b1786bded22b75ff6ba6/Dockerfile#L121
 RUN apt-get update && \
     env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
@@ -170,41 +125,4 @@ RUN apt-get update && \
         startdde && \
     /cleanup
     
-
-# additional applications
-RUN apt-get update && \
-    env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-        dde-calendar \
-        deepin-album \
-        deepin-calculator \
-        deepin-draw \
-        deepin-editor \
-        deepin-image-viewer \
-        deepin-movie \
-        deepin-music \
-        deepin-screenshot \
-        deepin-system-monitor \
-        deepin-terminal \
-        deepin-voice-note \
-        oneko \
-        sudo && \
-    /cleanup
-    
-    
-# fcitx: Chinese input support
-#ENV XMODIFIERS=@im=fcitx QT4_IM_MODULE=fcitx QT_IM_MODULE=fcitx GTK_IM_MODULE=fcitx
-#RUN apt-get update && \
-#    env DEBIAN_FRONTEND=noninteractive apt-get install -y \
-#        fcitx-sunpinyin && \
-#    mkdir -p /etc/xdg/autostart && \
-#    echo "[Desktop Entry]\n\
-#Encoding=UTF-8\n\
-#Version=0.9.4\n\
-#Type=Application\n\
-#Name=fcitx\n\
-#Comment=\n\
-#Exec=/usr/bin/fcitx-autostart\n\
-#" > /etc/xdg/autostart/fcitx.desktop && \
-#    /cleanup
-
 CMD ["startdde"]
