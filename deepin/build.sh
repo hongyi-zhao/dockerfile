@@ -5,7 +5,7 @@ docker build --network host --build-arg http_proxy='' --build-arg https_proxy=''
              --build-arg OPENSOURCE_MIRROR=${OPENSOURCE_MIRROR} \
              --build-arg DEEPIN_REPOSITORY=${DEEPIN_REPOSITORY} \
              --build-arg DEEPIN_RELEASE=${DEEPIN_RELEASE} \
-             -t hongyizhao/deepin-desktop:${DEEPIN_RELEASE} -f base/Dockerfile .
+             -t hongyizhao/deepin-desktop:${DEEPIN_RELEASE} -f desktop/Dockerfile .
 
 docker build --network host --build-arg http_proxy='' --build-arg https_proxy='' \
              --build-arg OPENSOURCE_MIRROR=${OPENSOURCE_MIRROR} \
