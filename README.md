@@ -26,7 +26,7 @@ $ cd deepin && bash build.sh
 ## Extend the base image as you wish:
 To add your desired applications, create and build from a custom Dockerfile with this image as a base. Example with `firefox`:
 ```
-# For the definition of related variables, see https://github.com/hongyi-zhao/dockerfile/blob/master/deepin/environment.
+# For the definition of related variables, see [here](https://github.com/hongyi-zhao/dockerfile/blob/master/deepin/environment).
 FROM hongyizhao/deepin-desktop:${DEEPIN_RELEASE}
 RUN apt-get update && \
     env DEBIAN_FRONTEND=noninteractive apt-get install -y firefox && \
