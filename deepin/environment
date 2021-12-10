@@ -7,7 +7,12 @@
 OPENSOURCE_MIRROR=mirrors.tuna.tsinghua.edu.cn
 DEEPIN_REPOSITORY=https://$OPENSOURCE_MIRROR/deepin
 DEEPIN_PRINTER_REPOSITORY=https://community-packages.deepin.com/printer
-DEEPIN_APPSTORE_REPOSITORY=https://community-store-packages.deepin.com/appstore
+# The folloiwng info is obtained from the desktop environment installed using deepin-desktop-community-20.3-amd64.iso
+DEEPIN_APPSTORE_REPOSITORY=https://com-store-packages.uniontech.com/appstore
+
+DEEPIN_RELEASE=apricot
+DEEPIN_PRINTER_RELEASE=eagle
+DEEPIN_APPSTORE_RELEASE=deepin
 
 #https://docs.docker.com/docker-hub/builds/advanced/#environment-variables-for-building-and-testing
 
@@ -18,7 +23,4 @@ DEEPIN_APPSTORE_REPOSITORY=https://community-store-packages.deepin.com/appstore
 #    DOCKERFILE_PATH: the dockerfile currently being built.
 #    DOCKER_TAG: the Docker repository tag being built.
 #    IMAGE_NAME: the name and tag of the Docker repository being built. (This variable is a combination of DOCKER_REPO:DOCKER_TAG.)
-
-DEEPIN_RELEASE=apricot
-DEEPIN_PRINTER_RELEASE=eagle
 

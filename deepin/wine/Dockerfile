@@ -8,7 +8,7 @@ ARG DEEPIN_APPSTORE_REPOSITORY
 ARG DEEPIN_PRINTER_REPOSITORY
 ARG DEEPIN_RELEASE
 ARG DEEPIN_PRINTER_RELEASE
-
+ARG DEEPIN_APPSTORE_RELEASE
 
 # The variables defined with ENV will be available after the image has been built:
 # Choose a deepin mirror close to your location.
@@ -38,7 +38,7 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com --recv-keys 1C30362C0A53D
     echo "deb ${DEEPIN_REPOSITORY} ${DEEPIN_RELEASE} main contrib non-free\n\
 deb-src ${DEEPIN_REPOSITORY} ${DEEPIN_RELEASE} main contrib non-free\n\
 deb ${DEEPIN_PRINTER_REPOSITORY} ${DEEPIN_PRINTER_RELEASE} non-free\n\
-deb ${DEEPIN_APPSTORE_REPOSITORY} ${DEEPIN_RELEASE} appstore\n\
+deb ${DEEPIN_APPSTORE_REPOSITORY} ${DEEPIN_APPSTORE_RELEASE} appstore\n\
 " > /etc/apt/sources.list && \
     dpkg --add-architecture i386 && \
     apt-get update && \
