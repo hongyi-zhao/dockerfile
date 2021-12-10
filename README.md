@@ -17,6 +17,9 @@ https-proxy=http://127.0.0.1:8080
 $ dockerfilelint < Dockerfile
 ```
 
+## Repositories
+See the [files](https://github.com/hongyi-zhao/dockerfile/tree/master/deepin/etc/apt) are obtained from the desktop environment installed with deepin-desktop-community-20.3-amd64.iso.
+
 ## Build docker images from the Dockerfile manually
 
 ```
