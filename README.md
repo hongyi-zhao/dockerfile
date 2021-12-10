@@ -98,8 +98,9 @@ $ deepin-wine6-stable WeChatSetup.exe
 $ LC_ALL=zh_CN.UTF-8 deepin-wine6-stable ~/.wine/drive_c/Program\ Files/Tencent/WeChat/WeChat.exe
 ```
 ## Similar project
-- https://github.com/vufa/deepin-wine-wechat-arch
+- https://github.com/hongyi-zhao/deepin-desktop-docker
 - https://github.com/mviereck/dockerfile-x11docker-deepin
+- https://github.com/vufa/deepin-wine-wechat-arch
 
 ## Application development workflows
 - https://github.com/pricing#compare-features
