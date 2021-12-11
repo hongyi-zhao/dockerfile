@@ -101,7 +101,7 @@ exit 0\n\
         dde-kwin \
         deepin-screensaver \
         dde-calendar \
-        deepin-terminal && \      
+        deepin-terminal && \
     /cleanup
   
 CMD ["startdde"]
