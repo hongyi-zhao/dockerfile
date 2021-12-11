@@ -29,7 +29,7 @@ $ sudo mount deepin-desktop-community-20.3-amd64.iso /mnt
 $ sed -n '/"dde":/,/\]/p' /mnt/live/packages_choice.json |
 sed '1d;$d' | awk -F\" '{print $2}' |
 egrep -v '^(dde|plymouth-.*|dde-session-.*|network-manager-.*)$' |
-awk '{line[NR]=$0} END {for (i=1;i<=length(line);i++) {if (i == 1 ) {print "env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends "line[i]" \\"} else { if (i == length(line)) { print line[i]} else { print line[i]" \\"}}}}'
+awk '{line[NR]=$0} END {for (i=1;i<=length(line);i++) {if (i == 1 ) {print "env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests "line[i]" \\"} else { if (i == length(line)) { print line[i]} else { print line[i]" \\"}}}}'
 env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends deepin-desktop-server \
 deepin-default-settings \
 dde-desktop \
