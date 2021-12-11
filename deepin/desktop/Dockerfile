@@ -68,7 +68,7 @@ RUN apt-get update && \
         xdg-utils \
         x11-xkb-utils \
         x11-xserver-utils \
-        deepin-terminal sudo && \
+        sudo && \
     /cleanup
     
 # Some additional tools:
@@ -108,22 +108,27 @@ Provides: deepin-user-experience-daemon\n\
 # deepin desktop
 #https://github.com/mviereck/test/blob/bd1cf7f313e85827274da40ae12ea0c99dd4f0cd/Dockerfile#L103
 #https://github.com/mviereck/dockerfile-x11docker-deepin/blob/1267c2f20adacf2b0a96b1786bded22b75ff6ba6/Dockerfile#L121
+#https://groups.google.com/g/comp.unix.shell/c/86z967wGrBE/m/XxlvCDv3CAAJ
+#$ sudo mount deepin-desktop-community-20.3-amd64.iso /mnt
+#$ { echo '{'; cat /mnt/live/packages_choice.json; } | jq -r '.dde[]' |egrep -v '^(dde|plymouth-.*|dde-session-.*|network-manager-.*)$' | awk '{line[NR]=$0} END {for (i=1;i<=length(line);i++) {if (i == 1 ) {print "env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends "line[i]" \\"} else { if (i == length(line)) { print line[i]} else { print line[i]" \\"}}}}'
 RUN apt-get update && \
-    env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-        dde-file-manager \
+    env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends deepin-desktop-server \
+        deepin-default-settings \
+        dde-desktop \
         dde-dock \
-        dde-kwin \
         dde-launcher \
         dde-control-center \
-        dde-clipboard \
-        dde-desktop \
-        dde-qt5integration \
+        startdde \
         deepin-artwork \
-        deepin-default-settings \
-        deepin-desktop-base \
+        dde-file-manager \
+        dde-qt5integration \
         deepin-wallpapers \
         fonts-noto \
-        startdde && \
+        dde-introduction \
+        dde-kwin \
+        deepin-screensaver \
+        dde-calendar \
+        deepin-terminal && \
     /cleanup
-    
+
 CMD ["startdde"]
