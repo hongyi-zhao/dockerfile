@@ -84,7 +84,7 @@ exit 0\n\
         #https://github.com/mviereck/dockerfile-x11docker-deepin/blob/1267c2f20adacf2b0a96b1786bded22b75ff6ba6/Dockerfile#L121
         #https://groups.google.com/g/comp.unix.shell/c/86z967wGrBE/m/XxlvCDv3CAAJ
         #$ sudo mount deepin-desktop-community-20.3-amd64.iso /mnt
-        #$ { echo '{'; cat /mnt/live/packages_choice.json; } | jq -r '.dde[]' |egrep -v '^(dde|plymouth-.*|dde-session-.*|network-manager-.*)$' | awk '{line[NR]=$0} END {for (i=1;i<=length(line);i++) {if (i == 1 ) {print "env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends "line[i]" \\"} else { if (i == length(line)) { print line[i]} else { print line[i]" \\"}}}}'
+        #$ { echo '{'; cat /mnt/live/packages_choice.json; } | jq -r '.dde[]' |egrep -v '^(dde|plymouth-.*|dde-session-.*|network-manager-.*)$' | awk '{line[NR]=$0} END {for (i=1;i<=length(line);i++) {if (i == 1 ) {print "env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests "line[i]" \\"} else { if (i == length(line)) { print line[i]} else { print line[i]" \\"}}}}'
         deepin-desktop-server \
         deepin-default-settings \
         dde-desktop \
