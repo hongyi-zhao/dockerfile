@@ -24,6 +24,7 @@ See the [files](https://github.com/hongyi-zhao/dockerfile/tree/master/deepin/etc
 
 See [here](https://groups.google.com/g/comp.unix.shell/c/86z967wGrBE/m/O8UHam31CAAJ) and [here](https://github.com/mviereck/dockerfile-x11docker-deepin/issues/25#issuecomment-731782023) for some relevant discussion.
 ```
+# https://groups.google.com/g/comp.unix.shell/c/86z967wGrBE/m/XxlvCDv3CAAJ
 $ sudo mount deepin-desktop-community-20.3-amd64.iso /mnt
 $ sed -n '/"dde":/,/\]/p' /mnt/live/packages_choice.json |
 sed '1d;$d' | awk -F\" '{print $2}' |
