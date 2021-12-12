@@ -40,17 +40,7 @@ COPY --from=builder /rootfs /
 ENV SHELL=/bin/bash \
     LANG=en_US.UTF-8
 
-RUN \
-    # cleanup script for use after apt-get
-    echo '#!/bin/sh\n\
-env DEBIAN_FRONTEND=noninteractive apt-get autoremove -y\n\
-apt-get autoclean -y\n\
-find /var/lib/apt/lists -type f -delete\n\
-find /var/cache -type f -delete\n\
-find /var/log -type f -delete\n\
-exit 0\n\
-' > /cleanup && chmod +x /cleanup && \
-    apt-get update && \
+RUN apt-get update && \
     env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests \
         # basics
         sudo \
@@ -102,6 +92,6 @@ exit 0\n\
         deepin-screensaver \
         dde-calendar \
         deepin-terminal && \
-    /cleanup
-  
+        apt-get clean
+        
 CMD ["startdde"]

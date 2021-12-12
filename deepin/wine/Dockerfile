@@ -43,6 +43,10 @@ deb ${DEEPIN_APPSTORE_REPOSITORY} ${DEEPIN_APPSTORE_RELEASE} appstore\n\
     dpkg --add-architecture i386 && \
     apt-get update && \
     env DEBIAN_FRONTEND=noninteractive apt-get install -y \
+        # Some appstore related packages
+        deepin-app-store \
+        deepin-appstore \
+        deepin-home-appstore-daemon \
         com.qq.weixin.deepin \
         com.qq.im.deepin \
         com.tencent.meeting.deepin && \
@@ -60,6 +64,7 @@ ENV XMODIFIERS=@im=fcitx QT4_IM_MODULE=fcitx QT_IM_MODULE=fcitx GTK_IM_MODULE=fc
 RUN apt-get update && \
     env DEBIAN_FRONTEND=noninteractive apt-get install -y \
         fcitx fcitx-googlepinyin fcitx-module-cloudpinyin && \
+        apt-get clean && \
     mkdir -p /etc/xdg/autostart && \
     echo "[Desktop Entry]\n\
 Encoding=UTF-8\n\
