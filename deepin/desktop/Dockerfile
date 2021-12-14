@@ -43,23 +43,9 @@ ENV SHELL=/bin/bash \
 RUN apt-get update && \
     env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests \
         # basics
-        sudo \
-        apt-transport-https \
-        ca-certificates \
-        dbus-x11 \
-        deepin-keyring \
-        gnupg \
-        libcups2 \
-        libpulse0 \
-        libxv1 \
-        locales-all \
-        mesa-utils \
-        mesa-utils-extra \
-        procps \
-        psmisc \
-        xdg-utils \
-        x11-xkb-utils \
-        x11-xserver-utils \
+        sudo apt-transport-https ca-certificates dbus-x11 deepin-keyring gnupg libcups2 \
+        libpulse0 libxv1 locales-all mesa-utils mesa-utils-extra procps psmisc xdg-utils \
+        x11-xkb-utils x11-xserver-utils \
         # Some additional tools:
         iproute2 iptables iputils-ping iputils-tracepath \
         openssh-server openssh-client dnsutils net-tools netcat traceroute \
