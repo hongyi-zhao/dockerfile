@@ -55,6 +55,10 @@ RUN apt-get update && \
         bash-completion libpulse0 pulseaudio \
         uuid equivs unrar lsb-release \
         xfonts-wqy fonts-wqy-microhei fonts-wqy-zenhei nano gedit gedit-plugins vim xclip xsel \
+        # Some appstore related packages
+        deepin-app-store \
+        deepin-appstore \
+        deepin-home-appstore-daemon \
         # deepin desktop
         #https://github.com/mviereck/test/blob/bd1cf7f313e85827274da40ae12ea0c99dd4f0cd/Dockerfile#L103
         #https://github.com/mviereck/dockerfile-x11docker-deepin/blob/1267c2f20adacf2b0a96b1786bded22b75ff6ba6/Dockerfile#L121
