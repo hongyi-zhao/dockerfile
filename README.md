@@ -56,7 +56,7 @@ $ cd deepin && bash build.sh
 ```
 
 ## Extend the base image as you wish
-For the definition of related variables, see [here](https://github.com/hongyi-zhao/dockerfile/blob/master/deepin/environment). Add your desired applications, for example, `firefox`, and build a custom image from a `Dockerfile` based on this image:
+For the definition of related variables, see [here](https://github.com/hongyi-zhao/dockerfile/blob/master/deepin/environment). Add your desired applications, for example, `firefox`, and build a custom image from a `Dockerfile` based on this one:
 ```
 FROM hongyizhao/deepin-desktop:${DEEPIN_RELEASE}
 RUN apt-get update && \
