@@ -18,7 +18,7 @@ $ dockerfilelint < Dockerfile
 ```
 
 ## Repositories
-See the [files](https://github.com/hongyi-zhao/dockerfile/tree/master/deepin/etc/apt) obtained from the desktop environment installed with deepin-desktop-community-20.3-amd64.iso.
+See the [files](https://github.com/hongyi-zhao/dockerfile/tree/master/deepin/etc/apt) obtained from the desktop environment installed with [deepin-desktop-community-20.3-amd64.iso](http://cdimage.deepin.com/releases/20.3/deepin-desktop-community-20.3-amd64.iso).
 
 ## Determine the dependency package list for the [deep desktop environment](https://www.deepin.org/en/dde/)
 
