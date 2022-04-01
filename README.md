@@ -9,6 +9,7 @@ $ docker run --rm -i hadolint/hadolint < deepin/wine/Dockerfile
 With [dockerfilelint](https://github.com/replicatedhq/dockerfilelint):
 ```
 $ sudo apt install npm
+# Use npm through a local proxy:
 $ npm config set proxy http://127.0.0.1:8080
 $ npm config set https-proxy http://127.0.0.1:8080
 $ sudo npm install -g dockerfilelint
