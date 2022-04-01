@@ -29,7 +29,6 @@ deb-src ${DEEPIN_REPOSITORY} ${DEEPIN_RELEASE} main contrib non-free\n\
 # 从空镜像开始正式构建
 FROM scratch
 # 署名
-MAINTAINER Hongyi Zhao <hongyi.zhao@gmail.com>
 LABEL maintainer="Hongyi Zhao <hongyi.zhao@gmail.com>"
 
 # 提取rootfs
