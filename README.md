@@ -2,7 +2,9 @@
 
 With [hadolint](https://github.com/hadolint/hadolint/issues/506):
 ```
-$ docker run --rm -i hadolint/hadolint < Dockerfile
+$ . deepin/environment 
+$ docker run --rm -i hadolint/hadolint < deepin/desktop/Dockerfile
+$ docker run --rm -i hadolint/hadolint < deepin/wine/Dockerfile
 ```
 With [dockerfilelint](https://github.com/replicatedhq/dockerfilelint):
 ```
@@ -14,7 +16,9 @@ $ cat .npmrc
 proxy=http://127.0.0.1:8080/
 https-proxy=http://127.0.0.1:8080
 
-$ dockerfilelint < Dockerfile
+$ . deepin/environment 
+$ dockerfilelint < deepin/desktop/Dockerfile
+$ dockerfilelint < deepin/wine/Dockerfile
 ```
 
 ## Repositories
