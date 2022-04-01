@@ -39,7 +39,7 @@ COPY --from=builder /rootfs /
 ENV SHELL=/bin/bash \
     LANG=en_US.UTF-8
 
-RUN apt-get update && \
+RUN apt-get -y update && \
     env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests \
         # basics
         sudo apt-transport-https ca-certificates dbus-x11 deepin-keyring gnupg libcups2 \
@@ -53,7 +53,11 @@ RUN apt-get update && \
         apt-file apt-transport-https apt-utils gdebi synaptic \
         bash-completion libpulse0 pulseaudio \
         uuid equivs unrar lsb-release \
-        xfonts-wqy fonts-wqy-microhei fonts-wqy-zenhei nano gedit gedit-plugins vim xclip xsel \
+        xfonts-wqy fonts-wqy-microhei fonts-wqy-zenhei nano gedit gedit-plugins vim xclip xsel
+        
+#https://github.com/hongyi-zhao/dockerfile/issues/1#issuecomment-1085819938        
+RUN apt-get -y update && \
+    env DEBIAN_FRONTEND=noninteractive apt-get install -y \
         # Some appstore related packages
         deepin-app-store \
         deepin-appstore \
@@ -82,5 +86,4 @@ RUN apt-get update && \
         dde-calendar \
         deepin-terminal && \
         apt-get clean
-        
 CMD ["startdde"]
