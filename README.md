@@ -64,8 +64,7 @@ EOF' --xephyr --network=bridge --pulseaudio --xoverip --home --share=$HOME --sud
 $ x11docker hongyizhao/deepin-wine:${DEEPIN_RELEASE} deepin-terminal
 ```
 ## Screenshot
-![image](https://user-images.githubusercontent.com/11155854/144838310-83643432-8871-43a3-905d-d7b51e1c5445.png)
-
+![image](https://github.com/hongyi-zhao/dockerfile/blob/master/deepin/screenshot.png)
 
 ## Run the latest official version of Windows applications, such as wechat, through Deepin-Wine directly (Not recommended)
 ```
