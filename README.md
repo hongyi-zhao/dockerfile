@@ -23,8 +23,7 @@ $ dockerfilelint < deepin/wine/Dockerfile
 ```
 
 ## Repositories
-See the [files](https://github.com/hongyi-zhao/dockerfile/tree/master/deepin/etc/apt) obtained from the desktop environment installed with [deepin-desktop-community-20.3-amd64.iso](http://cdimage.deepin.com/releases/20.3/deepin-desktop-community-20.3-amd64.iso).
-
+See the [files](https://github.com/hongyi-zhao/dockerfile/tree/master/deepin/etc/apt) obtained from the desktop environment installed with Deepin 64-bit Official ISO Disk Image download from [here](https://cdimage.deepin.com/releases/) or [here](https://www.deepin.org/en/download/).
 
 ## Build docker images from the Dockerfile manually
 
