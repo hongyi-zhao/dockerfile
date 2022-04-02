@@ -42,25 +42,29 @@ deb ${DEEPIN_APPSTORE_REPOSITORY} ${DEEPIN_APPSTORE_RELEASE} appstore\n\
 " > /etc/apt/sources.list && \
     dpkg --add-architecture i386 && \
     apt-get update && \
-    env DEBIAN_FRONTEND=noninteractive apt-get install -y \
+    env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests \
         com.qq.weixin.deepin \
         com.qq.im.deepin \
-        com.tencent.meeting.deepin && \
+        com.tencent.meeting.deepin \
+        fcitx fcitx-googlepinyin fcitx-module-cloudpinyin && \
         apt-get clean
-RUN cp /opt/apps/com.qq.weixin.deepin/entries/applications/com.qq.weixin.deepin.desktop /usr/share/applications && \
-    cp /opt/apps/com.qq.im.deepin/entries/applications/com.qq.im.deepin.desktop /usr/share/applications && \
-    cp /opt/apps/com.tencent.meeting.deepin/entries/applications/com.tencent.meeting.deepin.desktop /usr/share/applications
+        
+RUN if ! [ /opt/apps/com.qq.weixin.deepin/entries/applications/com.qq.weixin.deepin.desktop -ef /usr/share/applications/com.qq.weixin.deepin.desktop ]; then \
+      cp -f /opt/apps/com.qq.weixin.deepin/entries/applications/com.qq.weixin.deepin.desktop /usr/share/applications; \
+    fi && \
+    if ! [ /opt/apps/com.qq.im.deepin/entries/applications/com.qq.im.deepin.desktop -ef /usr/share/applications/com.qq.im.deepin.desktop ]; then \
+      cp -f /opt/apps/com.qq.im.deepin/entries/applications/com.qq.im.deepin.desktop /usr/share/applications; \
+    fi && \
+    if ! [ /opt/apps/com.tencent.meeting.deepin/entries/applications/com.tencent.meeting.deepin.desktop -ef /usr/share/applications/com.tencent.meeting.deepin.desktop ]; then \
+      cp -f /opt/apps/com.tencent.meeting.deepin/entries/applications/com.tencent.meeting.deepin.desktop /usr/share/applications; \
+    fi
 
 
 #https://github.com/mviereck/dockerfile-x11docker-deepin/issues/31#issuecomment-734367547
 #With option --home the setting is stored (has been before, too), but now it immediatly works after startup without running the config gui again.
 # fcitx: Chinese input support
 ENV XMODIFIERS=@im=fcitx QT4_IM_MODULE=fcitx QT_IM_MODULE=fcitx GTK_IM_MODULE=fcitx
-RUN apt-get update && \
-    env DEBIAN_FRONTEND=noninteractive apt-get install -y \
-        fcitx fcitx-googlepinyin fcitx-module-cloudpinyin && \
-        apt-get clean && \
-    mkdir -p /etc/xdg/autostart && \
+RUN mkdir -p /etc/xdg/autostart && \
     echo "[Desktop Entry]\n\
 Encoding=UTF-8\n\
 Version=0.9.4\n\
