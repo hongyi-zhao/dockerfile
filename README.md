@@ -25,34 +25,6 @@ $ dockerfilelint < deepin/wine/Dockerfile
 ## Repositories
 See the [files](https://github.com/hongyi-zhao/dockerfile/tree/master/deepin/etc/apt) obtained from the desktop environment installed with [deepin-desktop-community-20.3-amd64.iso](http://cdimage.deepin.com/releases/20.3/deepin-desktop-community-20.3-amd64.iso).
 
-## Determine the dependency package list for the [deep desktop environment](https://www.deepin.org/en/dde/)
-
-See [here](https://groups.google.com/g/comp.unix.shell/c/86z967wGrBE/m/O8UHam31CAAJ) and [here](https://github.com/mviereck/dockerfile-x11docker-deepin/issues/25#issuecomment-731782023) for some relevant discussion.
-```
-# https://groups.google.com/g/comp.unix.shell/c/86z967wGrBE/m/XxlvCDv3CAAJ
-$ sudo mount deepin-desktop-community-20.3-amd64.iso /mnt
-$ sed -n '/"dde":/,/\]/p' /mnt/live/packages_choice.json |
-sed '1d;$d' | awk -F\" '{print $2}' |
-egrep -v '^(dde|plymouth-.*|dde-session-.*|network-manager-.*)$' |
-awk '{line[NR]=$0} END {for (i=1;i<=length(line);i++) {if (i == 1 ) {print "env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests "line[i]" \\"} else { if (i == length(line)) { print line[i]} else { print line[i]" \\"}}}}'
-env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests deepin-desktop-server \
-deepin-default-settings \
-dde-desktop \
-dde-dock \
-dde-launcher \
-dde-control-center \
-startdde \
-deepin-artwork \
-dde-file-manager \
-dde-qt5integration \
-deepin-wallpapers \
-fonts-noto \
-dde-introduction \
-dde-kwin \
-deepin-screensaver \
-dde-calendar \
-deepin-terminal 
-```
 
 ## Build docker images from the Dockerfile manually
 
