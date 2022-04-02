@@ -57,17 +57,43 @@ RUN apt-get -y update && \
         
 #https://github.com/hongyi-zhao/dockerfile/issues/1#issuecomment-1085819938        
 RUN apt-get -y update && \
-    env DEBIAN_FRONTEND=noninteractive apt-get install -y \
+    env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests \
         # Some appstore related packages
-        deepin-app-store \
-        deepin-appstore \
-        deepin-home-appstore-daemon \
+#        deepin-app-store \
+#        deepin-appstore \
+#        deepin-home-appstore-daemon \
         # deepin desktop
         #https://github.com/mviereck/test/blob/bd1cf7f313e85827274da40ae12ea0c99dd4f0cd/Dockerfile#L103
         #https://github.com/mviereck/dockerfile-x11docker-deepin/blob/1267c2f20adacf2b0a96b1786bded22b75ff6ba6/Dockerfile#L121
         #https://groups.google.com/g/comp.unix.shell/c/86z967wGrBE/m/XxlvCDv3CAAJ
         #$ sudo mount deepin-desktop-community-20.3-amd64.iso /mnt
         #$ { echo '{'; cat /mnt/live/packages_choice.json; } | jq -r '.dde[]' |egrep -v '^(dde|plymouth-.*|dde-session-.*|network-manager-.*)$' | awk '{line[NR]=$0} END {for (i=1;i<=length(line);i++) {if (i == 1 ) {print "env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests "line[i]" \\"} else { if (i == length(line)) { print line[i]} else { print line[i]" \\"}}}}'
+  
+  #For deepin-desktop-community-20.5-amd64.iso,
+  #I've tried the following, but still failed to build the image.  
+  #$ sudo mount deepin-desktop-community-20.5-amd64.iso /mnt   
+# $ { echo '{'; cat /mnt/live/packages_choice.json; } | jq -r '.dde[]'
+#deepin-desktop-server
+#deepin-default-settings
+#dde-desktop
+#dde-dock
+#dde-launcher
+#dde-control-center
+#startdde
+#dde-session-ui
+#deepin-artwork
+#dde-file-manager
+#dde-qt5integration
+#plymouth-theme-deepin-logo
+#deepin-wallpapers
+#fonts-noto
+#dde-introduction
+#dde-kwin
+#deepin-screensaver
+#dde
+#dde-calendar
+#network-manager-integration-plugins
+#deepin-terminal
         deepin-desktop-server \
         deepin-default-settings \
         dde-desktop \
@@ -75,15 +101,19 @@ RUN apt-get -y update && \
         dde-launcher \
         dde-control-center \
         startdde \
+        dde-session-ui \
         deepin-artwork \
         dde-file-manager \
         dde-qt5integration \
+        plymouth-theme-deepin-logo \
         deepin-wallpapers \
         fonts-noto \
         dde-introduction \
         dde-kwin \
         deepin-screensaver \
+        dde \
         dde-calendar \
+        network-manager-integration-plugins \
         deepin-terminal && \
         apt-get clean
 CMD ["startdde"]
