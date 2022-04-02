@@ -48,7 +48,8 @@ Use [x11docker](https://github.com/mviereck/x11docker) to run [deepin desktop](h
 ```
 $ . environment
 $ pyenv shell 3.9.7
-# Run desktop:
+# Run the Deepin desktop:
+#https://github.com/mviereck/x11docker/issues/427#issuecomment-1086643968
 $ x11docker --runasroot 'sed -r "s/^[[:blank:]]*[|]//" <<-EOF > /etc/sudoers
         |#$ sudo grep -Ev '\''^[ ]*(#|$)'\'' /etc/sudoers  
         |Defaultsenv_reset
@@ -58,7 +59,7 @@ $ x11docker --runasroot 'sed -r "s/^[[:blank:]]*[|]//" <<-EOF > /etc/sudoers
         |%admin ALL=(ALL) ALL
         |%sudoALL=(ALL:ALL) ALL
         |$USER ALL=(ALL) NOPASSWD:ALL
-EOF' --xephyr --network=bridge --pulseaudio --xoverip --home --share=$HOME --sudouser -c --desktop --init=systemd -- --device /dev/mem:/dev/mem --cap-add=ALL -- hongyizhao/deepin-wine:${DEEPIN_RELEASE}
+EOF' --xephyr --network=bridge --pulseaudio --xoverip --home --share=$HOME --sudouser -c --desktop --init=systemd -- --device /dev/mem:/dev/mem --cap-add=IPC_LOCK --cap-add=NET_RAW --cap-add=NET_BIND_SERVICE -- hongyizhao/deepin-wine:${DEEPIN_RELEASE}
 
 # Run single application:
 $ x11docker hongyizhao/deepin-wine:${DEEPIN_RELEASE} deepin-terminal
