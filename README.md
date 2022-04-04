@@ -71,7 +71,6 @@ nxagent="--nxagent -c --fallback=no"
 #For example --scale=0.5 or --scale=2.
 xpra="--xpra --scale=1 -c --fallback=no"
 
-
 $ x11docker --runasroot 'sed -r "s/^[[:blank:]]*[|]//" <<-EOF > /etc/sudoers
         |#$ sudo grep -Ev '\''^[ ]*(#|$)'\'' /etc/sudoers  
         |Defaultsenv_reset
