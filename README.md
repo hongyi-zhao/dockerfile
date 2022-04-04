@@ -45,7 +45,7 @@ RUN apt-get update && \
 
 Use [x11docker](https://github.com/mviereck/x11docker) to run [deepin desktop](https://www.deepin.org) in a Docker container. 
 
-```shell
+```bash
 $ . environment
 $ pyenv shell 3.9.7
 # Run the Deepin desktop:
