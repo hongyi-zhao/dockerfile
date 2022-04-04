@@ -50,6 +50,28 @@ $ . environment
 $ pyenv shell 3.9.7
 # Run the Deepin desktop:
 #https://github.com/mviereck/x11docker/issues/427#issuecomment-1086643968
+#https://github.com/mviereck/x11docker/issues/428#issuecomment-1086896299
+#Let me try to further clarify my confusion as follows:
+#    --xephyr, --weston-xwayland and --xorg don't have their own clipboard manager.
+#    This clipboard script, as an alternative to the clipboard manager, must be activated through the -c option.
+#    As a result, when using -c with --xephyr, --weston-xwayland, or --xorg, this clipboard script will take effect.
+
+#https://github.com/mviereck/x11docker/issues/428#issuecomment-1086958214
+#I have included some basic graphical clips support in the clipboard script.
+#I was able to run knsip in a container using --xephyr -c and to copy some graphics to the host clipboard.
+
+#In a next step I might support the middle mouse click clipboard.
+xephyr="--xephyr -c --fallback=no"
+#$ sudo apt install nxagent
+nxagent="--nxagent -c --fallback=no"
+#https://github.com/mviereck/x11docker/issues/428#issuecomment-1086876392
+#https://github.com/mviereck/x11docker/issues/428#issuecomment-1086884021
+#https://github.com/mviereck/x11docker/issues/428#issuecomment-1086881441
+#Try a value between 0.25 an 8.
+#For example --scale=0.5 or --scale=2.
+xpra="--xpra --scale=1 -c --fallback=no"
+
+
 $ x11docker --runasroot 'sed -r "s/^[[:blank:]]*[|]//" <<-EOF > /etc/sudoers
         |#$ sudo grep -Ev '\''^[ ]*(#|$)'\'' /etc/sudoers  
         |Defaultsenv_reset
@@ -59,7 +81,7 @@ $ x11docker --runasroot 'sed -r "s/^[[:blank:]]*[|]//" <<-EOF > /etc/sudoers
         |%admin ALL=(ALL) ALL
         |%sudoALL=(ALL:ALL) ALL
         |$USER ALL=(ALL) NOPASSWD:ALL
-EOF' --xephyr --network=bridge --pulseaudio --xoverip --home --share=$HOME --sudouser -c --desktop --init=systemd -- --device /dev/mem:/dev/mem --cap-add=IPC_LOCK --cap-add=NET_RAW --cap-add=NET_BIND_SERVICE -- hongyizhao/deepin-wine:${DEEPIN_RELEASE}
+EOF' $xephyr --network=bridge --pulseaudio --home --share=$HOME --sudouser --desktop --init=systemd -- --device /dev/mem:/dev/mem --cap-add SYS_RAWIO --cap-add=IPC_LOCK --cap-add=NET_RAW --cap-add=NET_BIND_SERVICE -- hongyizhao/deepin-wine:${DEEPIN_RELEASE}
 
 # Run single application:
 $ x11docker hongyizhao/deepin-wine:${DEEPIN_RELEASE} deepin-terminal
