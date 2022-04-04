@@ -1,13 +1,13 @@
 ## Validate the dockerfile
 
 With [hadolint](https://github.com/hadolint/hadolint/issues/506):
-```
+```shell
 $ . deepin/environment 
 $ docker run --rm -i hadolint/hadolint < deepin/desktop/Dockerfile
 $ docker run --rm -i hadolint/hadolint < deepin/wine/Dockerfile
 ```
 With [dockerfilelint](https://github.com/replicatedhq/dockerfilelint):
-```
+```shell
 $ sudo apt install npm
 # Use npm through a local proxy:
 $ npm config set proxy http://127.0.0.1:8080
@@ -27,13 +27,13 @@ See the [files](https://github.com/hongyi-zhao/dockerfile/tree/master/deepin/etc
 
 ## Build docker images from the Dockerfile manually
 
-```
+```shell
 $ cd deepin && bash build.sh
 ```
 
 ## Extend the base image as you wish
 For the definition of related variables, see [here](https://github.com/hongyi-zhao/dockerfile/blob/master/deepin/environment). Add your desired applications, for example, `firefox`, and build a custom image from a `Dockerfile` based on this one:
-```
+```shell
 FROM hongyizhao/deepin-desktop:${DEEPIN_RELEASE}
 RUN apt-get update && \
     env DEBIAN_FRONTEND=noninteractive apt-get install -y firefox && \
@@ -45,7 +45,7 @@ RUN apt-get update && \
 
 Use [x11docker](https://github.com/mviereck/x11docker) to run [deepin desktop](https://www.deepin.org) in a Docker container. 
 
-```
+```shell
 $ . environment
 $ pyenv shell 3.9.7
 # Run the Deepin desktop:
@@ -90,7 +90,7 @@ $ x11docker hongyizhao/deepin-wine:${DEEPIN_RELEASE} deepin-terminal
 ![image](https://github.com/hongyi-zhao/dockerfile/blob/master/deepin/screenshot.png)
 
 ## Run the latest official version of Windows applications, such as wechat, through Deepin-Wine directly (Not recommended)
-```
+```shell
 $ Curl -O https://dldir1.qq.com/weixin/Windows/WeChatSetup.exe
 $ deepin-wine6-stable WeChatSetup.exe
 $ LC_ALL=zh_CN.UTF-8 deepin-wine6-stable ~/.wine/drive_c/Program\ Files/Tencent/WeChat/WeChat.exe
