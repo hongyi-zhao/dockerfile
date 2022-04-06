@@ -54,7 +54,7 @@ RUN apt-get -y update && \
         bash-completion libpulse0 pulseaudio \
         uuid equivs unrar lsb-release \
         xfonts-wqy fonts-wqy-microhei fonts-wqy-zenhei nano gedit gedit-plugins vim xclip xsel \
-        flameshot shutter gimp
+        flameshot gimp
        
 #https://www.programmersought.net/article/327583873.html
 #https://askubuntu.com/questions/1241362/fix-package-post-installation-script-subprocess-returned-error-exit-status-10-fo
