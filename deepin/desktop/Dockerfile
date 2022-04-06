@@ -39,8 +39,16 @@ COPY --from=builder /rootfs /
 ENV SHELL=/bin/bash \
     LANG=en_US.UTF-8
 
-RUN apt-get -y update && \
-    env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests \
+# Some appstore related packages
+RUN apt -y update && \
+    env DEBIAN_FRONTEND=noninteractive apt install -y --no-install-recommends --no-install-suggests \
+        deepin-app-store \
+        deepin-appstore \
+        deepin-home-appstore-daemon && \
+    apt clean
+
+RUN apt -y update && \
+    env DEBIAN_FRONTEND=noninteractive apt install -y --no-install-recommends --no-install-suggests \
         # basics
         sudo apt-transport-https systemd ca-certificates dbus-x11 deepin-keyring gnupg libcups2 \
         libpulse0 libxv1 locales-all mesa-utils mesa-utils-extra procps psmisc xdg-utils \
@@ -54,7 +62,8 @@ RUN apt-get -y update && \
         bash-completion libpulse0 pulseaudio \
         uuid equivs unrar lsb-release \
         xfonts-wqy fonts-wqy-microhei fonts-wqy-zenhei nano gedit gedit-plugins vim xclip xsel \
-        flameshot gimp
+        flameshot gimp && \
+    apt clean
        
 #https://www.programmersought.net/article/327583873.html
 #https://askubuntu.com/questions/1241362/fix-package-post-installation-script-subprocess-returned-error-exit-status-10-fo
@@ -63,13 +72,12 @@ RUN apt-get -y update && \
 # udisks2
 #E: Sub-process /usr/bin/dpkg returned an error code (1)
 #https://github.com/hongyi-zhao/dockerfile/issues/1#issuecomment-1085819938        
-RUN apt-get -y update && \
+RUN apt -y update && \
     env DEBIAN_FRONTEND=noninteractive apt install -y --no-install-recommends --no-install-suggests \
         udisks2 || \
-        rm /var/lib/dpkg/info/udisks2* && \
-        dpkg --configure -a && \
-        env DEBIAN_FRONTEND=noninteractive apt -f install
- 
+    rm /var/lib/dpkg/info/udisks2* && \
+    dpkg --configure -a && \
+    env DEBIAN_FRONTEND=noninteractive apt -f install
  
 #The following is a list of related DDE packages, but they should be the most basic core packages.
 # https://www.deepin.org/en/dde/
@@ -79,34 +87,30 @@ RUN apt-get -y update && \
 #dde-dock \
 #dde-kwin
 
-RUN apt-get -y update && \
-        # Some appstore related packages
-        deepin-app-store \
-        deepin-appstore \
-        deepin-home-appstore-daemon \
-        # Deepin desktop
-        #https://github.com/mviereck/test/blob/bd1cf7f313e85827274da40ae12ea0c99dd4f0cd/Dockerfile#L103
-        #https://github.com/mviereck/dockerfile-x11docker-deepin/blob/1267c2f20adacf2b0a96b1786bded22b75ff6ba6/Dockerfile#L121
-        #https://groups.google.com/g/comp.unix.shell/c/86z967wGrBE/m/XxlvCDv3CAAJ
-        #$ sudo mount deepin-desktop-community-20.5-amd64.iso /mnt
-#$ { echo '{'; cat /mnt/live/packages_choice.json; } | jq -r '.dde[]' | egrep -v '^(dde|plymouth-.*|dde-session-.*|network-manager-.*)$' | awk '{line[NR]=$0} END {for (i=1;i<=length(line);i++) {if (i == 1 ) {print "env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests"" \\\n"line[i]" \\"} else { if (i == length(line)) { print line[i]" && apt-get clean" } else { print line[i]" \\"}}}}'
-env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests \
-deepin-desktop-server \
-deepin-default-settings \
-dde-desktop \
-dde-dock \
-dde-launcher \
-dde-control-center \
-startdde \
-deepin-artwork \
-dde-file-manager \
-dde-qt5integration \
-deepin-wallpapers \
-fonts-noto \
-dde-introduction \
-dde-kwin \
-deepin-screensaver \
-dde-calendar \
-deepin-terminal && apt-get clean
+# Deepin desktop
+#https://github.com/mviereck/test/blob/bd1cf7f313e85827274da40ae12ea0c99dd4f0cd/Dockerfile#L103
+#https://github.com/mviereck/dockerfile-x11docker-deepin/blob/1267c2f20adacf2b0a96b1786bded22b75ff6ba6/Dockerfile#L121
+#https://groups.google.com/g/comp.unix.shell/c/86z967wGrBE/m/XxlvCDv3CAAJ
+#$ sudo mount deepin-desktop-community-20.5-amd64.iso /mnt
+#$ { echo '{'; cat /mnt/live/packages_choice.json; } | jq -r '.dde[]' | egrep -v '^(dde|plymouth-.*|dde-session-.*|network-manager-.*)$' | awk '{line[NR]=$0} END {for (i=1;i<=length(line);i++) {if (i == 1 ) {print "env DEBIAN_FRONTEND=noninteractive apt install -y --no-install-recommends --no-install-suggests"" \\\n"line[i]" \\"} else { if (i == length(line)) { print line[i]" && apt clean" } else { print line[i]" \\"}}}}'
+RUN apt -y update && \
+    env DEBIAN_FRONTEND=noninteractive apt install -y --no-install-recommends --no-install-suggests \
+        deepin-desktop-server \
+        deepin-default-settings \
+        dde-desktop \
+        dde-dock \
+        dde-launcher \
+        dde-control-center \
+        startdde \
+        deepin-artwork \
+        dde-file-manager \
+        dde-qt5integration \
+        deepin-wallpapers \
+        fonts-noto \
+        dde-introduction \
+        dde-kwin \
+        deepin-screensaver \
+        dde-calendar \
+        deepin-terminal && apt clean
 
 CMD ["startdde"]

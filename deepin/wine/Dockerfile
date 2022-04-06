@@ -20,7 +20,7 @@ ARG DEEPIN_APPSTORE_RELEASE
 
 #The variables introduced by env command only available in the layer of this RUN instruction:
 #Used the command similar to the folloiwng for testing specific applications in the container before putting them into Dockerfile.
-# sudo apt-get -o Acquire::http::proxy="socks5h://127.0.0.1:18888/" install com.tencent.meeting.deepin
+# sudo apt -o Acquire::http::proxy="socks5h://127.0.0.1:18888/" install com.tencent.meeting.deepin
 
 #Based on my tries, it seems that the method based on HKP protocol has a higher success rate.
 # It seems that the options --recv and --recv-keys are equivalent.
@@ -41,13 +41,13 @@ deb ${DEEPIN_PRINTER_REPOSITORY} ${DEEPIN_PRINTER_RELEASE} non-free\n\
 deb ${DEEPIN_APPSTORE_REPOSITORY} ${DEEPIN_APPSTORE_RELEASE} appstore\n\
 " > /etc/apt/sources.list && \
     dpkg --add-architecture i386 && \
-    apt-get update && \
-    env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests \
+    apt update && \
+    env DEBIAN_FRONTEND=noninteractive apt install -y --no-install-recommends --no-install-suggests \
         com.qq.weixin.deepin \
         com.qq.im.deepin \
         com.tencent.meeting.deepin \
         fcitx fcitx-googlepinyin fcitx-module-cloudpinyin && \
-        apt-get clean
+    apt clean
         
 RUN for i in /opt/apps/com.qq.weixin.deepin/entries/applications/com.qq.weixin.deepin.desktop \
          /opt/apps/com.qq.im.deepin/entries/applications/com.qq.im.deepin.desktop \
@@ -119,8 +119,8 @@ Exec=/usr/bin/fcitx-autostart\n\
 #deb https://mirror.deepines.com/testing/appstore eagle appstore 
 
     
-#RUN dpkg --add-architecture i386 && apt-get update && \
-#    apt-get install -y iproute2 iptables \
+#RUN dpkg --add-architecture i386 && apt update && \
+#    apt install -y iproute2 iptables \
 #    iputils-ping iputils-tracepath dnsutils net-tools netcat socat haproxy \
 #    gcc make cmake git curl gawk uuid apt-file bash-completion \
 #    gdebi synaptic equivs unrar lsb-release apt-utils apt-transport-https openssh-server openssh-client filezilla \
@@ -169,7 +169,7 @@ Exec=/usr/bin/fcitx-autostart\n\
 #$ docker build --network host -f Dockerfiles/deepin-wine . -t hongyi-zhao/deepin-wine
 
 # Run it as below:
-#$ sudo apt-get install xclip xsel
+#$ sudo apt install xclip xsel
 #https://github.com/mviereck/dockerfile-x11docker-deepin/issues/14#issuecomment-723617936
 #https://github.com/mviereck/dockerfile-x11docker-deepin/issues/19#issuecomment-724662450
 #https://github.com/mviereck/dockerfile-x11docker-deepin/issues/10#issuecomment-724745436
