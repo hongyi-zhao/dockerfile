@@ -46,7 +46,7 @@ deb ${DEEPIN_APPSTORE_REPOSITORY} ${DEEPIN_APPSTORE_RELEASE} appstore\n\
         com.qq.weixin.deepin \
         com.qq.im.deepin \
         com.tencent.meeting.deepin \
-        fcitx fcitx-googlepinyin fcitx-module-cloudpinyin && \
+        fcitx fcitx-config-common fcitx-config-gtk sogoupinyin && \
     apt clean
         
 RUN for i in /opt/apps/com.qq.weixin.deepin/entries/applications/com.qq.weixin.deepin.desktop \
@@ -58,8 +58,8 @@ RUN for i in /opt/apps/com.qq.weixin.deepin/entries/applications/com.qq.weixin.d
     done
 
 
-#https://github.com/mviereck/dockerfile-x11docker-deepin/issues/31#issuecomment-734367547
-#With option --home the setting is stored (has been before, too), but now it immediatly works after startup without running the config gui again.
+# https://github.com/mviereck/dockerfile-x11docker-deepin/issues/31#issuecomment-734367547
+# With option --home the setting is stored (has been before, too), but now it immediatly works after startup without running the config gui again.
 # fcitx: Chinese input support
 ENV XMODIFIERS=@im=fcitx QT4_IM_MODULE=fcitx QT_IM_MODULE=fcitx GTK_IM_MODULE=fcitx
 RUN mkdir -p /etc/xdg/autostart && \
