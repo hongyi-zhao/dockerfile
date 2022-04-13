@@ -43,6 +43,8 @@ deb ${DEEPIN_APPSTORE_REPOSITORY} ${DEEPIN_APPSTORE_RELEASE} appstore\n\
     dpkg --add-architecture i386 && \
     apt update && \
     env DEBIAN_FRONTEND=noninteractive apt install -y --no-install-recommends --no-install-suggests \
+        # https://github.com/mviereck/x11docker/issues/428#issuecomment-1097687428
+        copyq \
         com.qq.weixin.deepin \
         com.qq.im.deepin \
         com.tencent.meeting.deepin \
