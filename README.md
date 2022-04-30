@@ -12,12 +12,13 @@ $ sudo apt install npm
 # Use npm through a local proxy:
 $ npm config set proxy http://127.0.0.1:8080
 $ npm config set https-proxy http://127.0.0.1:8080
-$ sudo npm install -g dockerfilelint
 $ cat .npmrc
 proxy=http://127.0.0.1:8080/
 https-proxy=http://127.0.0.1:8080
 
-$ . deepin/environment 
+$ sudo npm install -g dockerfilelint
+
+$ . deepin/environment
 $ dockerfilelint < deepin/desktop/Dockerfile
 $ dockerfilelint < deepin/wine/Dockerfile
 ```
